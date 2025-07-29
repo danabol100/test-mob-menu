@@ -2,7 +2,7 @@
     padding: 20px;
     height: 100px;
     width: 100%;
-    background-color: aqua;
+    background-color: rgb(255, 255, 255);
     z-index: 990;
     position: fixed;
 }
@@ -34,12 +34,19 @@
 }
 
 .header_logo {
-
-
     font-size: 25px;
     position: absolute;
     left: 46%;
     transform: translateX(-50%);
+}
+
+.pk {
+    font-size: 45px;
+
+}
+
+.love {
+    color: red;
 }
 
 .headet_logo_item {}
@@ -52,7 +59,7 @@
 .burger {
     position: relative;
     top: 1;
-    left: 390;
+    left: 344;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -75,7 +82,7 @@
 .close {
     position: relative;
     top: -5;
-    left: 393;
+    left: 345;
 
 }
 
