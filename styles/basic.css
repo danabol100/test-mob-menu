@@ -1,0 +1,68 @@
+/* Убираем отступы и padding у всех элементов */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Наследуем шрифты и убираем особенности кнопок, input и т.п. */
+body,
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Убираем подчеркивания у ссылок */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Списки без маркеров */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Изображения не вылезают за контейнер */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Таблицы без отступов */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* HTML5-элементы как блочные (для старых браузеров) */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/* Базовый стиль для body */
+body {
+    line-height: 1.5;
+    font-family: sans-serif;
+    background: #fff;
+    color: #000;
+}
