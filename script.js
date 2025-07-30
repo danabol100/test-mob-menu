@@ -1,6 +1,23 @@
 const burger = document.querySelector('.burger');
 const close = document.querySelector('.close');
-const menu = document.querySelector('.mob_content')
+const menu = document.querySelector('.mob_content');
+const closeNav = document.querySelector('[close-nav]');
+
+document.addEventListener('click', (e) => {
+    const clickedOutside = !menu.contains(e.target) && !burger.contains(e.target) && !close.contains(e.target);
+    if (!menu.classList.contains('hidden') && clickedOutside) {
+        menu.classList.add('hidden');
+        close.classList.add('hidden');
+        burger.classList.remove('hidden');
+    }
+})
+
+closeNav.addEventListener('click', () => {
+    menu.classList.add('hidden');
+    close.classList.add('hidden');
+    burger.classList.remove('hidden');
+
+})
 
 burger.addEventListener('click', () => {
     burger.classList.add('hidden');
