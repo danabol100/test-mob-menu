@@ -1,0 +1,217 @@
+.container {
+    max-width: 1440px;
+}
+
+.cart-icon {
+
+    width: 38px;
+    height: 38px;
+    color: #fff;
+    /* Цвет иконки, можно изменить */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.cart-icon:hover {
+    color: #ff6600;
+    /* Цвет при наведении */
+}
+
+.popular {
+    font-family: "Ubuntu Sans", sans-serif;
+    background-color: #fff;
+    padding: 100px 0 100px 0;
+}
+
+.popular-list {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+    gap: 60px;
+}
+
+.list-item {}
+
+.item {
+    font-weight: 600;
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.popular_title {
+    text-align: center;
+    padding: 30px 0 50px 0;
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+}
+
+.popular_wrapper {
+    font-family: "Ubuntu Sans", sans-serif;
+    /* padding: 50px 0 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 24px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 0 100px;
+}
+
+.popular_card {
+    font-family: "Ubuntu Sans", sans-serif;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border: 2px solid #fff;
+    width: 260px;
+    height: 400px;
+    box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
+    overflow: hidden;
+
+}
+
+.popular_card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    filter: contrast(120%);
+}
+
+.card_img {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+
+
+}
+
+.card_title {
+    padding: 20px 0 10px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.card_price {
+    font-size: 18px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.button-wrapper {
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #333;
+    color: aliceblue;
+    margin: 20px auto 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+.card_stars {
+    text-align: center;
+    font-size: 18px;
+}
+
+.card_desc {
+    font-size: 14px;
+    text-align: center;
+    color: #000000;
+    font-family: 'Ubuntu', Arial, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 1.55;
+    word-break: break-word;
+}
+
+/* span {
+    opacity: 0.7;
+    font-size: 15px;
+} */
+
+.trans {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.card_btn {}
+
+@media(max-width:580px) {
+    .popular_title {
+        text-align: center;
+        padding: 0 0 50px 10px;
+
+    }
+}
+
+@media(max-width:480px) {
+    .popular_title {
+        font-size: 35px;
+    }
+
+    .popular_wrapper {
+        /* padding: 50px 0 0 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 24px; */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+
+    }
+
+    .item {
+
+        font-size: 14px;
+
+    }
+
+    .popular_card {
+        background-color: #fff;
+        width: 180px;
+        height: 350px;
+        box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
+        overflow: hidden;
+
+    }
+
+    .button-wrapper {
+        width: 100px;
+    }
+
+    .card_title {
+        font-family: 'Ubuntu', Arial, sans-serif;
+        padding: 6px 0 0 0;
+        line-height: 1.35;
+        font-size: 12px;
+    }
+
+    .card_price {
+        padding: 10px 0 20px 0;
+        font-size: 14px;
+        text-align: center;
+        color: rgb(0, 0, 0);
+    }
+
+
+
+    .button-wrapper {
+        display: none;
+    }
+
+    .popular {}
+
+    .popular-list {
+        flex-wrap: wrap;
+        margin: 10px auto;
+        gap: 20px;
+    }
+}

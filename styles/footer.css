@@ -1,5 +1,6 @@
 .footer {
     margin-top: 50px;
+    padding-bottom: 10px;
     background-color: black;
     width: 100%;
     color: aliceblue;
@@ -86,9 +87,22 @@
 }
 
 .img {
-
     width: 100%;
 }
+
+
+
+
+.hidden {
+    display: none;
+}
+
+.logo_desc12 {
+    font-size: 13px;
+    /* padding: 0 0 0 71px; */
+    text-align: center;
+}
+
 
 @media(max-width:479px) {
 

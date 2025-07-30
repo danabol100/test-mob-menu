@@ -1,5 +1,5 @@
 .about {
-    height: 100vh;
+
     width: 100%;
     background-color: rgb(231, 228, 228);
     font-family: "Ubuntu Sans", sans-serif;
@@ -14,7 +14,7 @@
 }
 
 .about_text {
-    padding: 0 20px;
+    padding: 0 0 40px 20px;
     opacity: .7;
     width: 900px;
     font-size: 25px;
