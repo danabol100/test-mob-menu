@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Рабочее бургер-меню</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            width: 100%;
+            height: 100px;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .header_nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header_nav_item {
+            font-size: 20px;
+        }
+
+        .header_logo {
+            font-size: 30px;
+            margin: 0 auto;
+        }
+
+        .pk {
+            font-size: 40px;
+        }
+
+        .love {
+            color: red;
+        }
+
+        .header_info_item {
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .burger,
+        .close {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        .burger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 4px 0;
+            background-color: black;
+        }
+
+        .mob_content {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            background: white;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 999;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 479px) {
+
+            .header_nav,
+            .header_info_item {
+                display: none;
+            }
+
+            .burger {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .close {
+                display: block;
+            }
+
+            .header_logo {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="header_nav">
+                <p class="header_nav_item"><a href="#">О бренде</a></p>
+                <p class="header_nav_item"><a href="#">Каталог</a></p>
+                <p class="header_nav_item"><a href="#">Доставка</a></p>
+                <p class="header_nav_item"><a href="#">Блог</a></p>
+            </div>
+
+            <div class="header_logo">
+                <a href="#"><span class="pk">PK</span><span class="love">love</span></a>
+            </div>
+
+            <div class="header_info_item">
+                <p>9-324-424-234</p>
+                <p>пн–пт: 09:00–18:00</p>
+                <p>по Киеву</p>
+            </div>
+
+            <!-- Бургер и Закрыть -->
+            <button class="burger" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <button class="close hidden" aria-label="Закрыть меню">
+                &times;
+            </button>
+        </div>
+    </header>
+
+    <!-- Мобильное меню -->
+    <div class="mob_content hidden">
+        <p class="header_nav_item"><a href="#">О бренде</a></p>
+        <p class="header_nav_item"><a href="#">Каталог</a></p>
+        <p class="header_nav_item"><a href="#">Доставка</a></p>
+        <p class="header_nav_item"><a href="#">Блог</a></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const burger = document.querySelector('.burger');
+            const close = document.querySelector('.close');
+            const menu = document.querySelector('.mob_content');
+
+            burger.addEventListener('click', () => {
+                burger.classList.add('hidden');
+                close.classList.remove('hidden');
+                menu.classList.remove('hidden');
+            });
+
+            close.addEventListener('click', () => {
+                close.classList.add('hidden');
+                burger.classList.remove('hidden');
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
