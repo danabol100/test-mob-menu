@@ -22,7 +22,7 @@
 .main_page3_gallery_item {
     width: 100%;
     height: 500px;
-    background-image: url(/assets/blackMotion.JPG);
+    background-image: url(../assets/blackMotion.JPG);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
