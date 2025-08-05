@@ -254,7 +254,6 @@ body {
 
 @media (max-width: 479px) {
 
-
     .header_wrapper {
         grid-template-columns: 1fr;
         justify-items: center;
@@ -262,5 +261,11 @@ body {
 
     .header_logo {
         align-self: center;
+    }
+}
+
+@media (max-width: 410px) {
+    .header {
+        padding: 20px 0 20px 0;
     }
 }
