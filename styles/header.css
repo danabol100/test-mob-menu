@@ -124,7 +124,7 @@ body {
     top: 98px;
     left: 0;
     width: 100%;
-    height: 400px;
+    height: 300px;
     background-color: rgb(255, 255, 255);
     text-align: center;
     display: flex;
@@ -136,7 +136,9 @@ body {
     color: #000;
 }
 
-.header_nav_item_mob {}
+.header_nav_item_mob {
+    font-size: 20px;
+}
 
 .last {
     font-size: 13px;

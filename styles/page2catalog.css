@@ -114,6 +114,7 @@
     font-style: normal;
     line-height: 1.55;
     word-break: break-word;
+    opacity: .7;
 }
 
 /* span {
@@ -221,7 +222,7 @@
         font-family: 'Ubuntu', Arial, sans-serif;
         padding: 6px 0 0 0;
         line-height: 1.35;
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .card_price {
