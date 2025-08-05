@@ -1,26 +1,9 @@
-.container {
-    max-width: 1440px;
-}
-
-.cart-icon {
-
-    width: 38px;
-    height: 38px;
-    color: #fff;
-    /* Цвет иконки, можно изменить */
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.cart-icon:hover {
-    color: #ff6600;
-    /* Цвет при наведении */
-}
-
 .popular {
     font-family: "Ubuntu Sans", sans-serif;
     background-color: #fff;
+    /* background-image: url(/assets/forest.jpg); */
     padding: 100px 0 100px 0;
+    margin: 0 auto;
 }
 
 .popular-list {
@@ -56,9 +39,9 @@
     flex-wrap: wrap;
     gap: 24px; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 260px);
     gap: 20px;
-    padding: 0 100px;
+    justify-content: center;
 }
 
 .popular_card {
@@ -66,15 +49,16 @@
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
     border: 2px solid #fff;
-    width: 260px;
+    /* width: 260px; */
     height: 400px;
     box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
     overflow: hidden;
-
+    cursor: pointer;
+    display: block;
 }
 
 .popular_card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     filter: contrast(120%);
 }
 
@@ -143,11 +127,56 @@
 
 .card_btn {}
 
+@media(max-width:1100px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(4, 200px);
+    }
+
+    .popular-list {
+        margin: 20px auto;
+        gap: 30px;
+    }
+}
+
+@media(max-width:900px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(2, 280px);
+    }
+
+    .popular-list {
+        gap: 30px;
+    }
+
+    .item {
+        font-size: 18px;
+    }
+}
+
+@media(max-width:700px) {
+    .popular-list {
+        gap: 20px;
+    }
+
+    .item {
+        font-size: 16px;
+    }
+
+    .popular {
+        padding: 100px 0 40px 0;
+
+    }
+}
+
+
 @media(max-width:580px) {
     .popular_title {
         text-align: center;
         padding: 0 0 50px 10px;
 
+    }
+
+    .popular_wrapper {
+        grid-template-columns: repeat(2, 250px);
     }
 }
 

@@ -12,6 +12,40 @@
     text-align: center;
 }
 
+@media(max-width:999px) {
+    .fraze p {
+        width: 700px;
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 750px) {
+    .fraze {
+        height: 230px;
+
+    }
+
+    .fraze p {
+        width: 560px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 610px) {
+    .fraze p {
+        width: 500px;
+        font-size: 20px;
+    }
+}
+
+
+@media (max-width: 560px) {
+    .fraze p {
+        width: 450px;
+        font-size: 20px;
+    }
+}
+
 @media (max-width:479px) {
     .fraze p {
         font-size: 16px;

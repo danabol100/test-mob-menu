@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js" defer></script>
+    <script src="js/script-page2.js" defer></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap"
@@ -12,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-    <title>Document</title>
+    <title>Page2</title>
 </head>
 
 <body>
@@ -40,15 +41,17 @@
             </div>
             <div class="mob_menu">
                 <div class="mob_content hidden">
-                    <p class="header_nav_item" close-nav><a class="scroll-link" href="#about-link">O Бренде</a></p>
-                    <p class="header_nav_item"><a class="scroll-link" href="#">Каталог</a></p>
-                    <p class="header_nav_item"><a class="scroll-link" href="#">Доставка</a></p>
-                    <p class="header_nav_item"><a class="scroll-link" href="#">Блог</a></p>
-                    <p class="header_nav_item last">9-324-424-234 <br>
+                    <p class="header_nav_item_mob" close-nav><a class="scroll-link" href="#about-link">O Бренде</a></p>
+                    <p class="header_nav_item_mob"><a class="scroll-link" href="#">Каталог</a></p>
+                    <p class="header_nav_item_mob"><a class="scroll-link" href="#">Доставка</a></p>
+                    <p class="header_nav_item_mob"><a class="scroll-link" href="#">Блог</a></p>
+                    <p class="header_nav_item_mob last">9-324-424-234 <br>
                         понеділок - пятница: 09:00-18:00<br>
-                        по київскому часу<br> <svg class="instagram-icon">
-                            <use href="assets/sprites 2.svg#instagram-icon"></use>
-                        </svg>
+                        по київскому часу<br>
+                    <div class="block_img_mob">
+                        <a href="https://instagram.com/">
+                            <img class="img_mob" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                    </div>
                     </p>
 
 
@@ -70,15 +73,13 @@
 
     <section class="popular">
         <div class="container">
-
-
             <h2 class="popular_title">Каталог кросівок</h2>
             <div class="popular-list">
                 <div class="list-item">
                     <a class="item" href="">Всі</a>
                 </div>
                 <div class="list-item">
-                    <a class="item" href="">Весна/Літо</a>
+                    <a class="item" href="">Весна</a>
                 </div>
                 <div class="list-item">
                     <a class="item" href="">Літо</a>
@@ -96,8 +97,16 @@
                     <a class="item" href="">Мокасини</a>
                 </div>
             </div>
+
+
+        </div>
+
+    </section>
+    <section>
+        <div class="container">
             <div class="popular_wrapper">
-                <div class="popular_card">
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
+
                     <img src="assets/boot.PNG" alt="img" data-hover="assets/slide.jpg" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -108,7 +117,9 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
+                </a>
+
+
                 <div class="popular_card">
                     <img src="assets/boot2.png" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
@@ -194,7 +205,7 @@
                     </div> -->
                 </div>
             </div>
-
+        </div>
     </section>
     <footer class="footer">
         <div class="container">
