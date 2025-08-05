@@ -1,0 +1,65 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main_team {
+    flex: 1;
+}
+
+.container {}
+
+.team_wrap {
+    margin-top: 100px;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.team_title {
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+
+.team_item {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.team_item {}
+
+.team_name {
+    text-align: center;
+}
+
+.team_prof {
+    text-align: center;
+}
+
+@media(max-width:700px) {
+    .team_item {
+        width: 250px;
+        height: 250px;
+
+    }
+
+    .team_wrap {
+
+        gap: 10px;
+    }
+}
+
+@media(max-width:550px) {
+    .team_wrap {
+        justify-content: center;
+    }
+}

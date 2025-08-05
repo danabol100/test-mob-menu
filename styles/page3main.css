@@ -123,6 +123,10 @@
     padding: 0 50px 0 50px;
 }
 
+.toggle_size_wrap {
+    padding: 0 20px;
+}
+
 .tittle_toggle {
     font-size: 25px;
 }
@@ -146,6 +150,7 @@
     .main_page3_wrap {
         grid-template-columns: repeat(2, 440px);
         gap: 50px;
+        padding: 10px 30px 0;
     }
 
     .sneakers_desc {
@@ -160,6 +165,11 @@
         grid-template-columns: none;
         grid-template-rows: repeat(2, auto);
         gap: 50px;
+    }
+
+    .toggle_size {
+
+        padding: 0 0 0 30px;
     }
 }
 
