@@ -129,6 +129,15 @@
 
 .card_btn {}
 
+
+/* ниже для корзины */
+
+.main_page3_size.selected {
+    background-color: black;
+    color: #fff;
+    border: 2px solod #333;
+}
+
 @media(max-width:1100px) {
     .popular_wrapper {
         grid-template-columns: repeat(4, 200px);

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/script-page3.js" defer></script>
+    <script src="js/mini-cart.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +75,9 @@
         <div class="container">
             <div class="main_page3_wrap">
                 <div class="main_page3_gallery">
-                    <div class="main_page3_gallery_item"></div>
+                    <div class="main_page3_gallery_item">
+                        <img class="product-img" src="/assets/blackMotion.JPG" alt="Black Motion">
+                    </div>
                 </div>
                 <div class="main_page3_desc">
                     <h3 class="main_page_title">Black Motion</h3>
@@ -87,7 +90,7 @@
                         <button class="main_page3_size">40</button>
                         <button class="main_page3_size">41</button>
                     </div>
-                    <button class="buy">В корзину</button>
+                    <button class="add-to-cart" data-name="Товар 1" data-price="100">В корзину</button>
                     <p class="sneakers_desc">Black Motion - легкі чоловічі кеди з натуральної бавовни в базових
                         відтінках:
                         сірому або стильному м’ятному. Верх моделі виготовлений з дихаючого бавовняного канвасу, що
@@ -221,6 +224,22 @@
         </div>
         <p class="logo_desc12 hidden">2025 ©</p>
     </footer>
+    <div id="mini-cart" class="mini-cart">
+        <img class="mini-card-img" src="/assets/cart-icon.png" alt="Корзина">
+        <span id="mini-cart-count" class="mini-cart-count">0</span>
+    </div>
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal"
+        style="display:none; position: fixed; top: 100px; right: 20px; width: 320px; background: #fff; border: 1px solid #ccc; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1001;">
+        <h3 class="card-open-title">Ваше замовлення</h3>
+        <div id="cart-items"></div>
+        <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
+        <button class="card-btn-close" onclick="closeCart()"></button>
+    </div>
+
+
+
+
 
 </body>
 
