@@ -70,12 +70,13 @@
 }
 
 .add-to-cart {
-    background-color: black;
+    background-color: #098507;
+    ;
     width: 135px;
     height: 40px;
     color: aliceblue;
-    border-radius: 4px;
-    font-size: 14px;
+    border-radius: 6px;
+    font-size: 16px;
     font-weight: 800;
     cursor: pointer;
 }
@@ -202,7 +203,7 @@
 }
 
 #cart-items {
-    max-height: 300px;
+    max-height: 400px;
     /* или больше, как тебе удобно */
     overflow-y: auto;
     padding-right: 10px;
@@ -271,18 +272,74 @@
 .btn-to-cart {
     display: inline-block;
     padding: 10px 20px;
-    background: black;
+    background: #098507;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
 }
 
+/* Скрыта по умолчанию */
+.mobile-fixed-cart-btn {
+    display: none;
+}
+
+/* По умолчанию: скрыть мобильную кнопку, показать десктопную */
+.mobile-fixed-cart-btn {
+    display: none;
+}
+
+.desktop-cart-btn {
+    display: inline-block;
+}
+
+/* Скрыто по умолчанию */
+.mobile-fixed-cart-btn {
+    display: none;
+}
+
+@media (max-width: 610px) {
+    .mobile-fixed-cart-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 10px 16px;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+
+    .mobile-cart-price {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .mobile-cart-btn {
+        padding: 12px 16px;
+        background: #098507;
+        ;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    /* Скрыть десктопную кнопку */
+    .desktop-cart-btn {
+        display: none;
+    }
+}
+
 .btn-back {
     display: block;
-    background-color: #d3c8c8;
+    background-color: #060606;
     width: 100%;
-
+    color: #ffffff;
 
 }
 
@@ -293,13 +350,16 @@
     top: 124px;
     right: 20px;
     width: 320px;
-    background: rgb(249 239 244);
+    background: rgb(255, 255, 255);
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 999;
 }
+
+
+
 
 /* Скрываем кнопку возврата на экранах шире 610px */
 @media (min-width: 611px) {
