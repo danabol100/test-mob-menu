@@ -9,13 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const year = document.querySelector(".logo_desc1");
     const yearRemove = document.querySelector(".logo_desc12");
 
+
     function handleViewportChange() {
         if (window.innerWidth <= 479) {
             year?.classList.add('hidden');
             yearRemove?.classList.remove('hidden');
+
         } else {
             year?.classList.remove('hidden');
             yearRemove?.classList.add('hidden');
+
         }
     }
 

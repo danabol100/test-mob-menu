@@ -113,3 +113,11 @@ function renderCartModal() {
 
 
 };
+window.closeCart = function () {
+    const modal = document.getElementById('cart-modal');
+    if (modal) modal.style.display = 'none';
+
+    if (typeof updateMiniCart === 'function') {
+        updateMiniCart();
+    }
+};

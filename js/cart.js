@@ -12,15 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = `
-                <p>Корзина пуста</p>
-                <a href="page2.html" style="
-                    display: inline-block;
-                    margin-top: 15px;
-                    padding: 10px 20px;
-                    background: black;
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 5px;
+                <p style="text-align: center; " >Корзина пуста</p>
+                <a class="btn-back-to-catalog" href="page2.html" style="
+                
                 ">Вернуться в каталог</a>
             `;
             cartTotal.textContent = '';

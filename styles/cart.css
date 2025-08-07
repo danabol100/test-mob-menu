@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -14,51 +14,6 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 30px;
-}
-
-.cart-item {
-    display: flex;
-    gap: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    align-items: center;
-}
-
-.cart-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-}
-
-.cart-details {
-    flex: 1;
-}
-
-.cart-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.qty-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
-    background: #ddd;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.remove-btn {
-    background: transparent;
-    border: none;
-    font-size: 40px;
-    cursor: pointer;
-    color: #999;
-    margin-left: auto;
-    margin-top: -145px;
 }
 
 form {
@@ -76,11 +31,13 @@ select {
     box-sizing: border-box;
 }
 
+
 .total {
     font-size: 18px;
     margin-top: 20px;
     font-weight: bold;
 }
+
 
 .submit-btn {
     padding: 12px;
@@ -91,56 +48,135 @@ select {
     cursor: pointer;
 }
 
-@media (max-width: 600px) {
-    .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
 
-    .cart-controls {
-        margin-top: 10px;
-    }
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ccc;
+    padding: 15px 0;
 }
 
-@media (max-width: 600px) {
-    .cart-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .cart-controls {
-        margin-top: 10px;
-        flex-wrap: wrap;
-    }
-
-    .cart-item img {
-        width: 100%;
-        height: auto;
-    }
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
-input,
-select,
-.submit-btn {
+.cart-details {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-details strong {
     font-size: 18px;
-    padding: 14px;
+}
+
+.cart-details .size {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Контейнер для количества и цены */
+.qty-price-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Кол-во */
+.cart-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .qty-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #aaa;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
 }
 
-.container {
-    padding: 15px;
+/* Цена */
+.price {
+    font-weight: bold;
+    font-size: 16px;
 }
 
-body {
-    font-size: clamp(14px, 4vw, 18px);
+/* Кнопка удалить */
+.remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+    border: 1px solid #888;
+    border-radius: 50%;
+    padding: 0 6px;
 }
 
-#cart-items {
-    max-height: 400px;
-    overflow-y: auto;
+.remove-btn:hover {
+    color: rgb(198, 85, 85);
+}
+
+.btn-back-to-catalog {
+    align-items: center;
+    display: block;
+
+    width: 160px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+
+/* === Адаптация для мобильных устройств === */
+
+@media (max-width: 600px) {
+    .cart-item {
+        /* flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; */
+    }
+
+    /* .cart-item img {
+        width: 100%;
+        height: auto;
+    } */
+
+    .qty-price-row {
+        justify-content: space-between;
+        width: 100%;
+        gap: 0;
+    }
+
+    .cart-controls {
+        gap: 6px;
+    }
+
+    .price {
+        font-size: 15px;
+    }
+
+    .remove-btn {
+        right: 15px;
+
+    }
 }

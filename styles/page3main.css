@@ -240,9 +240,9 @@
 .mini-cart {
     display: none;
     position: fixed;
-    top: 115px;
+    top: 135px;
     right: 50px;
-    z-index: 1000;
+    z-index: 998;
     cursor: pointer;
     background-color: rgb(255, 255, 255, 0.5);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
@@ -277,6 +277,37 @@
     border-radius: 5px;
     font-weight: bold;
 }
+
+.btn-back {
+    display: block;
+    background-color: #d3c8c8;
+    width: 100%;
+
+
+}
+
+/* модальная корзина  */
+#cart-modal {
+    display: none;
+    position: fixed;
+    top: 124px;
+    right: 20px;
+    width: 320px;
+    background: rgb(249 239 244);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+/* Скрываем кнопку возврата на экранах шире 610px */
+@media (min-width: 611px) {
+    .btn-back {
+        display: none !important;
+    }
+}
+
 
 @media(max-width:1100px) {
     .main_page3_wrap {
