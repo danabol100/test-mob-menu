@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             itemDiv.innerHTML = `
             <div class="product-in-card">
-  <div style="position: relative; display: flex; gap: 10px; align-items: center;">
+  <div style="position: relative; display: flex;padding:0 10px; gap: 38px; align-items: center;">
     <img src="${item.img}" style="width: 50px; height: 50px; object-fit: cover;" alt="${item.name}">
     
     <div>
@@ -220,6 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         cartTotal.innerHTML = `<strong>До сплаты:</strong> ${total} грн`;
+
+
+
+
 
         // 🗑 Удаление товара
         document.querySelectorAll('.remove-item').forEach(btn => {

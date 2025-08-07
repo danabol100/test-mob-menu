@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/script-page1.js" defer></script>
+    <script src="js/cart-modal.js"></script>
+    <script src="js/mini-cart.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -169,8 +171,21 @@
             <p class="logo_desc12 hidden">2025 ©</p>
         </footer>
     </div>
-
-
+    <div id="mini-cart" class="mini-cart">
+        <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
+        <span id="mini-cart-count" class="mini-cart-count">0</span>
+    </div>
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal"
+        style="display:none; position: fixed; top: 100px; right: 20px; width: 320px; background: rgb(249 239 244);border-radius: 5px; border: 1px solid #ccc; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1001;">
+        <h3 class="card-open-title">Ваше замовлення</h3>
+        <div id="cart-items"></div>
+        <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
+        <button class="card-btn-close" onclick="closeCart()"></button>
+        <div style="text-align: center;">
+            <a class="btn-to-cart" href="cart.html">Перейти</a>
+        </div>
+    </div>
 </body>
 
 </html>

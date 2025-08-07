@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/script-page2.js" defer></script>
+    <script src="js/cart-modal.js"></script>
+    <script src="js/mini-cart.js" defer></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,7 +123,7 @@
                 </a>
 
 
-                <div class="popular_card">
+                <a class="popular_card" href="page4.item2.html" style="text-decoration: none;">
                     <img src="assets/boot2.png" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion White</h5>
@@ -132,8 +134,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot1.JPG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -144,8 +146,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot.PNG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -156,8 +158,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot.PNG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -168,8 +170,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot.PNG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -180,8 +182,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot.PNG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -192,8 +194,8 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
-                <div class="popular_card">
+                </a>
+                <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <img src="assets/boot.PNG" alt="" class="card_img">
                     <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p>
                     <h5 class="card_title">Motion Black</h5>
@@ -204,7 +206,7 @@
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -263,7 +265,21 @@
         </div>
         <p class="logo_desc12 hidden">2025 ©</p>
     </footer>
-
+    <div id="mini-cart" class="mini-cart">
+        <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
+        <span id="mini-cart-count" class="mini-cart-count">0</span>
+    </div>
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal"
+        style="display:none; position: fixed; top: 100px; right: 20px; width: 320px; background: rgb(249 239 244);border-radius: 5px; border: 1px solid #ccc; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1001;">
+        <h3 class="card-open-title">Ваше замовлення</h3>
+        <div id="cart-items"></div>
+        <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
+        <button class="card-btn-close" onclick="closeCart()"></button>
+        <div style="text-align: center;">
+            <a class="btn-to-cart" href="cart.html">Перейти</a>
+        </div>
+    </div>
 
 </body>
 
