@@ -173,34 +173,38 @@
 }
 
 .remove-item {
-    position: absolute;
-    top: 0;
-    right: 0;
     background: transparent;
     border: none;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 20px;
     color: #888;
     cursor: pointer;
     padding: 4px 8px;
-    line-height: 1;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
-.remove-item::after {
-    content: "✕";
-}
+
+
 
 .remove-item:hover {
     color: #d00;
 }
 
+
+
+
+
 .product-in-card {
+    position: relative;
+    /* <-- Добавить! */
     border: 1px solid #b1abab;
     border-radius: 5px;
+    background-color: #fff;
     font-family: "Ubuntu Sans", sans-serif;
-    background-color: #ffffff;
-
 }
+
 
 #cart-items {
     max-height: 400px;
@@ -215,21 +219,20 @@
 
 .card-btn-close {
     position: absolute;
-    top: 0;
-    right: 0;
-    background: transparent;
+    top: 10px;
+    right: 10px;
+    background: none;
     border: none;
-    font-size: 20px;
-    font-weight: bold;
-    color: #888;
+    font-size: 24px;
+    color: #333;
     cursor: pointer;
-    padding: 4px 8px;
-    line-height: 1;
+    z-index: 1002;
 }
 
-.card-btn-close::after {
-    content: "✕";
+.card-btn-close::before {
+    content: '✕';
 }
+
 
 .card-open-title {
     margin: 10px 0;

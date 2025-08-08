@@ -255,3 +255,21 @@
         gap: 20px;
     }
 }
+
+.remove-item {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin-left: auto;
+    align-self: start;
+}
+
+
+
+
+.remove-item:hover {
+    color: #d00;
+}

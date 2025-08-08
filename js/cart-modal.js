@@ -44,7 +44,7 @@ function renderCartModal() {
       <div style="margin-top: 5px;"><strong>${item.price * item.qty} грн</strong></div>
     </div>
 
-    <button class="remove-item" data-name="${item.name}" data-size="${item.size}" title="Удалить"></button>
+    <button class="remove-item" data-name="${item.name}" data-size="${item.size}" title="Удалить">x</button>
   </div>
   </div>
 `;
