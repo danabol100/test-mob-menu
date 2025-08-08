@@ -193,16 +193,27 @@
 }
 
 
+/* .product-in-card {
+    position: relative;
+    <-- Добавить!
+border: 1px solid #b1abab;
+border-radius: 5px;
+background-color: #fff;
+font-family: "Ubuntu Sans",
+sans-serif;
+}
 
-
-
+*/
 .product-in-card {
     position: relative;
-    /* <-- Добавить! */
-    border: 1px solid #b1abab;
+
+
     border-radius: 5px;
     background-color: #fff;
     font-family: "Ubuntu Sans", sans-serif;
+    margin-bottom: 10px;
+    border: 1px solid #b1abab;
+
 }
 
 
@@ -212,6 +223,7 @@
     overflow-y: auto;
     padding-right: 10px;
     /* чтобы скролл не налезал на текст */
+
 }
 
 
@@ -265,7 +277,7 @@
     position: absolute;
     top: 0px;
     right: -6px;
-    background: red;
+    background: #098507;
     color: white;
     border-radius: 50%;
     padding: 2px 8px;
@@ -440,7 +452,7 @@
         grid-template-columns: none;
         grid-template-rows: repeat(2, auto);
         gap: 70px;
-
+        padding-top: 30px;
 
     }
 

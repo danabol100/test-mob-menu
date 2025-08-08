@@ -20,15 +20,15 @@ function renderCartModal() {
         total += itemTotal;
 
         const itemDiv = document.createElement('div');
-        itemDiv.style.marginBottom = '10px';
+        itemDiv.style.marginBottom = '8px';
         itemDiv.style.borderBottom = '1px solid #eee';
-        itemDiv.style.paddingBottom = '5px';
+        itemDiv.style.paddingBottom = '0';
 
 
         itemDiv.innerHTML = `
             <div class="product-in-card">
-  <div style="position: relative; display: flex;padding:0 10px; gap: 38px; align-items: center;">
-    <img src="${item.img}" style="width: 50px; height: 50px; object-fit: cover;" alt="${item.name}">
+  <div style="position: relative; display: flex;padding:0 10px; gap: 48px; align-items: center;">
+    <img src="${item.img}" style="width: 55px; height: 55px; object-fit: cover;" alt="${item.name}">
     
     <div>
       <div><strong>${item.name}</strong></div>

@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             itemDiv.classList.add('product-in-card');
 
             itemDiv.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 20px; padding: 10px 0;">
-          <img src="${item.img}" style="width: 50px; height: 50px; object-fit: cover;">
+        <div style="display: flex; align-items: center; gap: 48px; padding: 5px 0;">
+          <img src="${item.img}" style="width: 55px; height: 55px; object-fit: cover; margin:0 0 0 10px">
           <div style="flex-grow:1;">
             <div><strong>${item.name}</strong></div>
             <div>Розмір: ${item.size}</div>
