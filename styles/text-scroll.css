@@ -9,18 +9,23 @@
     height: 50px;
     overflow: hidden;
     background-color: rgb(221, 224, 224);
+    overflow-x: clip;
+    contain: paint;
 }
 
 .text-item {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 16px;
     transform: translateX(100%);
     opacity: 0;
     animation: slide 15s infinite;
+    transform: translate3d(100%, 0, 0);
 }
 
 /* Каждому задаём сдвиг старта, чтобы шли по очереди */
@@ -60,5 +65,38 @@
     100% {
         transform: translateX(-100%);
         opacity: 0;
+    }
+}
+
+@media (max-width: 430px) {
+    .section-slider {
+        margin: 72px 0 24px 0;
+        /* поменьше отступов */
+    }
+
+    .text-slider {
+        height: 42px;
+        /* компактнее по высоте */
+    }
+
+    .text-item {
+        font-size: clamp(12px, 4.2vw, 16px);
+        /* гибкий размер шрифта */
+        padding: 0 10px;
+        /* меньше боковые отступы */
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text-item {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        position: static;
+        /* чтобы всё просто отобразилось без абсолютов */
+    }
+
+    .text-slider {
+        height: auto;
     }
 }

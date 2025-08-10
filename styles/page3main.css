@@ -7,8 +7,8 @@
 
 
 .main_page3_wrap {
-    padding: 50px 30px 0;
-    margin-top: 100px;
+    padding: 0px 0px 0 0;
+    margin-top: 0px;
     display: grid;
     grid-template-columns: repeat(2, 500px);
     gap: 100px;
@@ -61,14 +61,14 @@
 .button_size {
     padding: 30px 0 30px 0;
     display: grid;
-    gap: 15px;
-    grid-template-columns: repeat(3, 110px);
+    gap: 10px;
+    grid-template-columns: repeat(3, 115px);
 }
 
 .main_page3_size {
-    border: 1px solid black;
+    border: 1px solid rgb(126, 122, 122);
     border-radius: 4px;
-    height: 40px;
+    height: 44px;
 
 }
 
@@ -504,7 +504,7 @@
         grid-template-columns: none;
         grid-template-rows: repeat(2, auto);
         gap: 30px;
-        padding-top: 30px;
+        /* padding-top: 30px; */
 
     }
 

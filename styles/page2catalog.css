@@ -85,6 +85,13 @@
     }
 }
 
+@media (max-width: 560px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(2, minmax(200px, 1fr));
+        gap: 5px;
+    }
+}
+
 
 
 /* .popular_card {
