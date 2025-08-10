@@ -1,4 +1,13 @@
 .look {
+    overflow-x: hidden;
+    /* или clip */
+}
+
+.look_animacion {
+    overflow-x: hidden;
+}
+
+.look {
     background-color: rgb(36, 28, 28);
     padding: 0 20px 60px 20px;
 }
