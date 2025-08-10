@@ -1,8 +1,18 @@
 .fraze {
     width: 100%;
-    height: 200px;
+    /* height: 200px; */
     font-family: "Ubuntu Sans", sans-serif;
+    background-color: rgb(36, 28, 28);
+    color: white;
 
+}
+
+.fraze_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0 60px 0;
 }
 
 .fraze p {
@@ -13,6 +23,39 @@
     text-align: center;
 }
 
+.go-to-catalog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100px;
+    box-shadow: 0 4px 0 #ccc,
+        /* нижняя тень (имитация объёма) */
+        0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease;
+
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 999px;
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+
+}
+
+
+
+.go-to-catalog:hover {
+    background: #f7f7f7;
+}
+
+.go-to-catalog:active {
+    box-shadow: 0 2px 0 #ccc,
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px);
+}
+
+
+
 @media(max-width:999px) {
     .fraze p {
         width: 700px;
@@ -21,10 +64,7 @@
 }
 
 @media (max-width: 750px) {
-    .fraze {
-        height: 230px;
-
-    }
+    .fraze {}
 
     .fraze p {
         width: 560px;
@@ -38,9 +78,9 @@
         font-size: 20px;
     }
 
-    .fraze {
-        height: 200px;
-    }
+    .fraze {}
+
+
 }
 
 
@@ -58,7 +98,5 @@
 
     }
 
-    .fraze {
-        height: 160px;
-    }
+    .fraze {}
 }

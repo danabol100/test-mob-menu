@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/script-page2.js" defer></script>
+    <script src="js/header.js" defer></script>
+    <script src="js/script-page1.js" defer></script>
     <script src="js/cart-modal.js" defer></script>
     <script src="js/mini-cart.js" defer></script>
 
@@ -14,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="styles/header.css"> -->
     <link rel="stylesheet" href="styles/styles.css">
     <title>Page2</title>
 </head>
@@ -35,49 +37,97 @@
                 </div>
                 <div class="header_info">
                     <div class="header_info_item">
-                        <p>9-324-424-234</p>
+                        <div class="block_img_wrap">
+                            <div class="block_img_mob">
+                                <a href="https://t.me/">
+                                    <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
+
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://instagram.com/">
+                                    <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://tik-tok.com"></a>
+                                <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://tik-tok.com"></a>
+                                <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
+                            </div>
+                        </div>
+
+                        <!-- <p>9-324-424-234</p>
                         <p>понеділок - пятница: 09:00–18:00</p>
-                        <p>по київскому часу</p>
+                        <p>по київскому часу</p> -->
                     </div>
                 </div>
             </div>
             <div class="mob_menu">
-                <div class="mob_content hidden">
+                <div class="mob_content">
+                    <button class="close" aria-label="close menu">
+                        <span>×</span>
+                    </button>
                     <p class="header_nav_item_mob" close-nav><a class="scroll-link" href="index.html#about-link">O
                             бренде</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="#">Каталог</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="#">Доставка</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="#">Блог</a></p>
-                    <p class="header_nav_item_mob last">9-324-424-234 <br>
+                    <p class="header_logo_item"><a href="index.html"> <span class="pk">PK</span><span
+                                class="love">love</span></a>
+                    </p>
+
+
+                    <p class="header_nav_item_text"> "Зручне взуття з широким носком для комфортних кроків щодня.
+                        Простір
+                        для пальців, стиль та турбота про ваші ноги."</p>
+                    <!-- <p class="header_nav_item_mob last">9-324-424-234 <br>
                         понеділок - пятница: 09:00-18:00<br>
                         по київскому часу<br>
                     <div class="block_img_mob">
                         <a href="https://instagram.com/">
                             <img class="img_mob" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
-                    </div>
+                    </div> -->
                     </p>
+                    <div class="block_img_wrap">
+                        <div class="block_img_mob">
+                            <a href="https://t.me/">
+                                <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
+
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://instagram.com/">
+                                <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://tik-tok.com"></a>
+                            <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://tik-tok.com"></a>
+                            <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
+                        </div>
+                    </div>
 
 
 
                 </div>
                 <button class="burger" aria-label="open menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span class="white-burger"></span>
+                    <span class="white-burger"></span>
+                    <span class="white-burger"></span>
                 </button>
-                <button class="close hidden" aria-label="close menu">
-                    <span>X</span>
-                </button>
+
 
             </div>
         </div>
     </section>
 
 
-    <section class="popular">
-        <div class="container">
-            <h2 class="popular_title">Каталог кросівок</h2>
-            <div class="popular-list">
+    <!-- <section class="popular">
+        <div class="container"> -->
+    <!-- <h2 class="popular_title">Каталог кросівок</h2> -->
+    <!-- <div class="popular-list">
                 <div class="list-item">
                     <a class="item" href="">Всі</a>
                 </div>
@@ -99,24 +149,36 @@
                 <div class="list-item">
                     <a class="item" href="">Мокасини</a>
                 </div>
+            </div> -->
+
+
+    <!-- </div>
+
+    </section> -->
+    <section class="section-slider">
+        <div class="container">
+            <div class="text-slider">
+                <div class="text-item">Доставка 2-3 дні!!</div>
+                <div class="text-item">Возможен обмін!</div>
+                <div class="text-item">И тут что еще написать </div>
             </div>
-
-
         </div>
-
     </section>
     <section>
         <div class="container">
+            <h4>Кросівки</h4>
             <div class="popular_wrapper">
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-
-                    <img src="assets/boot.PNG" alt="img" data-hover="assets/slide.jpg" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/item1.webp" alt="img" data-hover="assets/slide.jpg" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
@@ -124,85 +186,106 @@
 
 
                 <a class="popular_card" href="page4.item2.html" style="text-decoration: none;">
-                    <img src="assets/boot2.png" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/item2.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion White</h5>
-                    <p class="card_price">1 440 грн. <span class="trans">1 640 грн</span></p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн. <span class="trans">1 640 грн</span></p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page5item3.htm" style="text-decoration: none;">
-                    <img src="assets/boot1.JPG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/item3.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Mocasin</h5>
-                    <p class="card_price">1 440 грн.</p>
-                    <p class="card_desc">Анатомічні мокасины з широоким
+                    <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-                    <img src="assets/boot.PNG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/item1.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-                    <img src="assets/boot.PNG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/item2.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-                    <img src="assets/boot.PNG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/catalog3.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-                    <img src="assets/boot.PNG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/catalog1.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
-                    <img src="assets/boot.PNG" alt="" class="card_img">
+                    <div class="card_media">
+                        <img src="assets/catalog2.webp" alt="" class="card_img">
+                    </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
-                    <p class="card_price">1 440 грн.</p>
                     <p class="card_desc">Анатомічні кросівки з широоким
                         носком
                     </p>
+                    <p class="card_price">1 440 грн.</p>
+
                     <!-- <div class="button-wrapper">
                         <button class="card_btn">В корзину</button>
                     </div> -->

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger');
-    const close = document.querySelector('.close');
+    const closeBtn = document.querySelector('.mob_content .close');
     const menu = document.querySelector('.mob_content');
     const closeNav = document.querySelector('[close-nav]');
     const year = document.querySelector(".logo_desc1");
@@ -13,39 +13,57 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             year?.classList.remove('hidden');
             yearRemove?.classList.add('hidden');
+            // При переходе на десктоп — закрыть меню и показать бургер
+            menu?.classList.remove('open');
+            closeBtn?.classList.add('hidden');
+            burger?.classList.remove('hidden');
+            document.body.classList.remove('body--no-scroll');
+
         }
     }
 
     handleViewportChange();
     window.addEventListener('resize', handleViewportChange);
 
-    if (burger && close && menu) {
-        burger.addEventListener('click', () => {
-            burger.classList.add('hidden');
-            close.classList.remove('hidden');
-            menu.classList.remove('hidden');
-        });
+    function openMenu() {
+        menu.classList.add('open');
+        burger.classList.add('hidden');
+        closeBtn.classList.remove('hidden');
+        document.body.classList.add('body--no-scroll', 'menu-open');
+    }
 
-        close.addEventListener('click', () => {
-            burger.classList.remove('hidden');
-            close.classList.add('hidden');
-            menu.classList.add('hidden');
-        });
+    function closeMenu() {
+        menu.classList.remove('open');
+        closeBtn.classList.add('hidden');
+        burger.classList.remove('hidden');
+        document.body.classList.remove('body--no-scroll', 'menu-open');
+    }
 
+    if (burger && closeBtn && menu) {
+        burger.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+
+        // клик вне панели — закрыть
         document.addEventListener('click', (e) => {
-            if (!menu.contains(e.target) && !burger.contains(e.target) && !close.contains(e.target)) {
-                menu.classList.add('hidden');
-                close.classList.add('hidden');
-                burger.classList.remove('hidden');
+            if (!menu.classList.contains('open')) return;
+            const target = e.target;
+            if (!menu.contains(target) && !burger.contains(target) && !closeBtn.contains(target)) {
+                closeMenu();
             }
         });
 
-        closeNav?.addEventListener('click', () => {
-            menu.classList.add('hidden');
-            close.classList.add('hidden');
-            burger.classList.remove('hidden');
+        // клик по пункту с [close-nav] — закрыть
+        closeNav?.addEventListener('click', closeMenu);
+
+        // Esc — закрыть
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && menu.classList.contains('open')) {
+                closeMenu();
+            }
         });
     }
+
+
 
     // Модалка
     const zoomableImages = document.querySelectorAll('.zoomable');

@@ -21,7 +21,7 @@
 
 .main_page3_gallery_item {
     width: 100%;
-    height: 500px;
+    /* height: 500px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +30,7 @@
 
 .product-img {
     max-width: 100%;
-    max-height: 100%;
+    /* max-height: 100%; */
     object-fit: contain;
 }
 
@@ -56,15 +56,18 @@
     font-size: 30px;
 }
 
+.size_block {}
+
 .button_size {
     padding: 30px 0 30px 0;
-    display: flex;
+    display: grid;
     gap: 10px;
+    grid-template-columns: repeat(3, 110px);
 }
 
 .main_page3_size {
     border: 1px solid black;
-    width: 40px;
+    /* width: 80px; */
     height: 40px;
 
 }
@@ -93,7 +96,7 @@
 
 .container {}
 
-.specification_wrap {
+/* .specification_wrap {
     display: flex;
     justify-content: space-around;
     font-size: 20px;
@@ -102,7 +105,14 @@
 .btn_spec {
     width: 400px;
 
-}
+} */
+
+
+
+
+
+
+
 
 .hover {
     border-bottom: 1px solid #333;
@@ -127,11 +137,11 @@
 
 .toggle_spec_wrap {
     max-width: 900px;
-    padding: 0 50px 0 50px;
+    padding: 0 50px 50px 50px;
 }
 
 .toggle_size_wrap {
-    padding: 0 20px;
+    padding: 0 20px 20px 0;
 }
 
 .tittle_toggle {
@@ -193,17 +203,7 @@
 }
 
 
-/* .product-in-card {
-    position: relative;
-    <-- Добавить!
-border: 1px solid #b1abab;
-border-radius: 5px;
-background-color: #fff;
-font-family: "Ubuntu Sans",
-sans-serif;
-}
 
-*/
 .product-in-card {
     position: relative;
 
@@ -313,6 +313,12 @@ sans-serif;
     display: none;
 }
 
+/* когда меню открыто — хедер не уезжает */
+.menu-open .header {
+    transform: none !important;
+}
+
+
 @media (max-width: 610px) {
     .mobile-fixed-cart-btn {
         display: flex;
@@ -335,13 +341,14 @@ sans-serif;
 
     .mobile-cart-btn {
         padding: 12px 16px;
-        background: #098507;
+        background: #000000;
         ;
         color: white;
         font-weight: bold;
         border: none;
         border-radius: 6px;
         font-size: 16px;
+        width: 100%;
     }
 
     /* Скрыть десктопную кнопку */
@@ -383,12 +390,20 @@ sans-serif;
     }
 }
 
+@media (min-width: 1001px) {
+
+    .main_page_title_under,
+    .main_page3_price_under {
+        display: none;
+    }
+}
+
 
 @media(max-width:1100px) {
     .main_page3_wrap {
         grid-template-columns: repeat(2, 440px);
         gap: 50px;
-        padding: 10px 30px 0;
+        padding: 10px 0;
     }
 
     .sneakers_desc {
@@ -408,6 +423,13 @@ sans-serif;
     .toggle_size {
         padding: 0 0 0 30px;
     }
+
+    .main_page3_desc {
+        padding: 0 20px;
+    }
+
+
+
 }
 
 @media(max-width:620px) {
@@ -426,6 +448,28 @@ sans-serif;
 
         padding: 0 20px 0 20px;
     }
+
+    .specification_wrap {
+        flex-wrap: nowrap;
+        /* как ты и хотел — без wrap */
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .btn_spec,
+    .btn_desc {
+        flex: 1 1 0;
+        /* делим строку пополам */
+        min-width: 0;
+        /* разрешаем ужиматься */
+        width: auto;
+        /* сброс фиксированных ширин */
+        max-width: none;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }
 
 @media(max-width:479px) {
@@ -437,10 +481,7 @@ sans-serif;
         padding: 0 15px;
     }
 
-    .specifications {
-        max-width: 400px;
 
-    }
 
     .main_page3_wrap {
         /* padding: 50px 0px 0;
@@ -451,14 +492,14 @@ sans-serif;
         gap: 30px; */
         grid-template-columns: none;
         grid-template-rows: repeat(2, auto);
-        gap: 70px;
+        gap: 30px;
         padding-top: 30px;
 
     }
 
     .main_page3_gallery {
-        width: 380px;
-        height: 380px;
+        /* width: 380px;
+        height: 380px; */
     }
 
     .sneakers_desc {
@@ -467,7 +508,7 @@ sans-serif;
 
     .toggle_spec_wrap {
         width: 400px;
-        padding: 0 20px 0 20px;
+        padding: 0 20px 40px 20px;
     }
 
     .tittle_toggle {
@@ -484,12 +525,14 @@ sans-serif;
         padding: 0 0 0 10px;
     }
 
-    .btn_desc {
-        width: 390px;
-    }
 
-    .btn_spec {
-        width: 390px;
+
+
+
+    .size_block {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
 }
@@ -497,6 +540,47 @@ sans-serif;
 @media(max-width:433px) {
     .specifications {
         max-width: 390px;
-
+        padding: 0;
     }
+}
+
+/* Кнопки в один ряд, без переноса */
+.specification_wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: nowrap;
+    /* принципиально: без wrap */
+}
+
+/* Резиновые кнопки 50/50, учитывая gap */
+.btn_spec,
+.btn_desc {
+    flex: 1 1 0;
+    /* растягиваются поровну */
+    min-width: 0;
+    /* разрешаем ужиматься */
+    box-sizing: border-box;
+    /* учитываем padding/border */
+    width: auto;
+    /* убираем фикс. ширины */
+    max-width: none;
+    padding: 12px 16px;
+    white-space: nowrap;
+    /* не переносим текст */
+    overflow: hidden;
+    /* если совсем тесно */
+    text-overflow: ellipsis;
+    /* троеточие вместо ломания вёрстки */
+    /* (опционально) размер шрифта адаптивный:
+  font-size: clamp(14px, 3.8vw, 20px); */
+}
+
+/* Удали/закомментируй ВСЕ старые width: 400px/390px для .btn_spec/.btn_desc */
+.btn_spec {
+    /* width: 400px;  <-- убрать */
+}
+
+.btn_desc {
+    /* width: 400px;  <-- убрать */
 }

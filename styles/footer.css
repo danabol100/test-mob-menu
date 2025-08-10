@@ -1,9 +1,10 @@
 .footer {
-    margin-top: 50px;
+    /* margin-top: 50px; */
     padding-bottom: 10px;
-    /* background-color: black; */
+    background-color:
+        rgb(36, 28, 28);
     /* background-image: url(../assets/forest.jpg); */
-    background-image: url(../assets/footer3.jpg);
+    /* background-image: url(../assets/footer3.jpg); */
     width: 100%;
     color: aliceblue;
 }

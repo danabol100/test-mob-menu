@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/header.js" defer></script>
     <script src="js/script-page1.js" defer></script>
     <script src="js/cart-modal.js" defer></script>
     <script src="js/mini-cart.js" defer></script>
@@ -16,129 +17,241 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            document
+                .querySelectorAll('.look_animacion, .about_wrap-left')
+                .forEach(el => io.observe(el));
+        });
+    </script>
+
+
+
     <title>Page1</title>
 </head>
 
 <body>
 
-    <section class="header" id="header-link">
+    <section class="header black_header" id="header-link">
         <div class="container">
             <div class="header_wrapper">
-                <div class="header_nav">
+                <div class="header_nav black">
                     <p class="header_nav_item"><a class="scroll-link" href="#about-link">O бренде</a></p>
                     <p class="header_nav_item"><a class="scroll-link" href="page2.html">Каталог</a></p>
                     <p class="header_nav_item"><a class="scroll-link" href="#">Доставка</a></p>
                     <p class="header_nav_item"><a class="scroll-link" href="#">Блог</a></p>
                 </div>
                 <div class="header_logo">
-                    <p class="header_logo_item"><a href="#header-link"> <span class="pk">PK</span><span
+                    <p class="header_logo_item"><a href="#header-link"> <span class="pk black">PK</span><span
                                 class="love">love</span></a>
                     </p>
                 </div>
                 <div class="header_info">
-                    <div class="header_info_item">
-                        <p>9-324-424-234</p>
+                    <div class="header_info_item black">
+                        <div class="block_img_wrap">
+                            <div class="block_img_mob">
+                                <a href="https://t.me/">
+                                    <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
+
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://instagram.com/">
+                                    <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://tik-tok.com"></a>
+                                <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
+                            </div>
+                            <div class="block_img_mob">
+                                <a href="https://tik-tok.com"></a>
+                                <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
+                            </div>
+                        </div>
+
+
+                        <!-- <p>9-324-424-234</p>
                         <p>понеділок - пятница: 09:00–18:00</p>
-                        <p>по київскому часу</p>
+                        <p>по київскому часу</p> -->
                     </div>
                 </div>
             </div>
             <div class="mob_menu">
-                <div class="mob_content hidden">
+                <div class="mob_content black_mob">
+                    <button class="close black" aria-label="close menu">
+                        <span>×</span>
+                    </button>
                     <p class="header_nav_item_mob" close-nav><a class="scroll-link" href="#about-link">O бренде</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="page2.html">Каталог</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="#">Доставка</a></p>
                     <p class="header_nav_item_mob"><a class="scroll-link" href="#">Блог</a></p>
-                    <p class="header_nav_item last">9-324-424-234 <br>
-                        понеділок - пятница: 09:00-18:00<br>
-                        по київскому часу<br>
-                    <div class="block_img_mob">
-                        <a href="https://instagram.com/">
-                            <img class="img_mob" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
-                    </div>
+                    <p class="header_logo_item"><a href="#header-link"> <span class="pk black">PK</span><span
+                                class="love">love</span></a>
                     </p>
+
+
+                    <p class="header_nav_item_text"> "Зручне взуття з широким носком для комфортних кроків щодня.
+                        Простір
+                        для пальців, стиль та турбота про ваші ноги."</p>
+
+                    <!-- <p class="header_nav_item last">9-324-424-234 <br>
+                        понеділок - пятница: 09:00-18:00<br>
+                        по київскому часу<br> -->
+                    <div class="block_img_wrap">
+                        <div class="block_img_mob">
+                            <a href="https://t.me/">
+                                <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
+
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://instagram.com/">
+                                <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://tik-tok.com"></a>
+                            <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
+                        </div>
+                        <div class="block_img_mob">
+                            <a href="https://tik-tok.com"></a>
+                            <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
+                        </div>
+                    </div>
 
 
 
                 </div>
                 <button class="burger" aria-label="open menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span class="black_burg"></span>
+                    <span class="black_burg"></span>
+                    <span class="black_burg"></span>
                 </button>
-                <button class="close hidden" aria-label="close menu">
-                    <span>X</span>
-                </button>
+
 
             </div>
         </div>
     </section>
-    <section class="main">
+    <!-- <section class="main">
         <div class="container">
-            <a href="page2.html" class="go-to-catalog">Купити</a>
+
+        </div>
+    </section> -->
+    <section class="roll-image-block">
+        <div class="roll-blok-wrap">
+            <div class="roll-cards">
+                <div class="roll-card">
+                    <div class="blok-roll-img">
+                        <img class="roll-img" src="assets/bot1.webp" alt="">
+                        <div class="roll-card-text">Motion</div>
+                    </div>
+
+                </div>
+                <div class="roll-card">
+                    <div class="blok-roll-img">
+                        <img class="roll-img" src="assets/bot2.webp" alt="">
+                        <div class="roll-card-text">Comfort</div>
+                    </div>
+
+                </div>
+                <div class="roll-card">
+                    <div class="blok-roll-img">
+                        <img class="roll-img" src="assets/bo3.webp" alt="">
+                        <div class="roll-card-text">Style</div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="fraze" id="fraze-link">
         <div class="container">
-            <p class="fraze_text">Ми поєднали моду, тренди та технології ортопедичної і босоногого взуття, щоб досягти
-                головної мети: створити
-                черевики, які не захочеться знімати навіть наприкінці дня.
+            <div class="fraze_wrap">
+                <a href="page2.html" class="go-to-catalog">Купити</a>
+                <p class="fraze_text">
+                    Ми поєднали моду, тренди та технології ортопедичної і босоногого взуття, щоб
+                    досягти
+                    головної мети: створити
+                    черевики, які не захочеться знімати навіть наприкінці дня.
+                    Ми поєднали моду, тренди та технології ортопедичної і босоногого взуття, щоб
+                    досягти
+                    головної мети: створити
+                    черевики, які не захочеться знімати навіть наприкінці дня.
 
-            </p>
-        </div>
-    </section>
+                </p>
 
-    <section class="about" id="about-link">
-        <div class="container">
-            <h2 class="about_title">О нас</h2>
-            <p class="about_text">
-                PKLove народився у Києві в 2023 році — в непростий, але важливий час. Ми — команда ентузіастів здорового
-                способу життя з понад 20-річним досвідом у сфері ортопедії та медичних виробів. Ми обожнюємо рух,
-                підтримуємо свідоме споживання і віримо, що комфортне взуття може бути стильним. Працюючи з провідними
-                західними брендами — як-от Birkenstock, Vivobarefoot, Xero Shoes, Camper та інші — ми навчилися цінувати
-                якість, баланс і функціональність. Ми створили пікелови — нову категорію взуття, в якій поєднується все
-                найкраще: анатомічна підтримка, природна свобода руху, естетика і комфорт. PKLove — це взуття, яке ви не
-                захочете знімати.
-            </p>
-        </div>
-    </section>
-
-    <section id="look-book" class="look">
-        <div class="container">
-            <h3 class="look-title">LookBook</h3>
-            <div class="look-wrapper">
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img1.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img2.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img3.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img4.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img5.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img6.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img7.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img8.webp" alt="">
-                </div>
-                <div class="look-content">
-                    <img class="look-img zoomable" src="assets/img9.webp" alt="">
-                </div>
             </div>
         </div>
     </section>
 
+    <!-- <hr class="main-hr-white"> -->
+    <section class="about" id="about-link">
+        <div class="container">
+            <div class="about_wrap about_wrap-left">
+                <h2 class="about_title">О нас</h2>
+                <p class="about_text">
+                    PKLove народився у Києві в 2023 році — в непростий, але важливий час. Ми — команда ентузіастів
+                    здорового
+                    способу життя з понад 20-річним досвідом у сфері ортопедії та медичних виробів. Ми обожнюємо рух,
+                    підтримуємо свідоме споживання і віримо, що комфортне взуття може бути стильним. Працюючи з
+                    провідними
+                    західними брендами — як-от Birkenstock, Vivobarefoot, Xero Shoes, Camper та інші — ми навчилися
+                    цінувати
+                    якість, баланс і функціональність. Ми створили пікелови — нову категорію взуття, в якій поєднується
+                    все
+                    найкраще: анатомічна підтримка, природна свобода руху, естетика і комфорт. PKLove — це взуття, яке
+                    ви не
+                    захочете знімати.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- <hr class="main-hr-white"> -->
+    <section id="look-book" class="look">
+        <div class="container">
+            <div class="look_animacion">
+                <h3 class="look-title">LookBook</h3>
+                <div class="look-wrapper">
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img1.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img2.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img3.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img4.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img5.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img6.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img7.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img8.webp" alt="">
+                    </div>
+                    <div class="look-content">
+                        <img class="look-img zoomable" src="assets/img9.webp" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <hr class="main-hr-white"> -->
     <footer class="footer">
         <div class="container">
             <div class="footer_first_wrapper">
@@ -194,13 +307,7 @@
         </div>
         <p class="logo_desc12 hidden">2025 ©</p>
     </footer>
-    <div class="modal hidden">
-        <div class="overlay"></div>
-        <div class="modal-content">
-            <img src="" alt="Увеличенное изображение" id="modal-img">
 
-        </div>
-    </div>
 
     <div class="modal hidden">
         <div class="overlay"></div>

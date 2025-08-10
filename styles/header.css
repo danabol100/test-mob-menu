@@ -6,15 +6,39 @@ body {
     overflow-y: scroll;
 }
 
-.header {
+/* .header {
     padding: 0;
-    height: 100px;
+    height: 60px;
     width: 100%;
     background-color: rgb(255, 255, 255);
     z-index: 1000;
     position: fixed;
     top: 0;
 
+} */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    /* border-bottom: 1px solid #ddd; */
+    border-bottom: none;
+    padding: 0;
+    /* у тебя есть внутренние отступы в .header_wrapper */
+    z-index: 2000;
+    /* выше моб-меню (которое 1000) */
+    transition: transform .3s ease;
+    will-change: transform;
+}
+
+.black_header {
+    background-color: #000;
+}
+
+.header--hidden {
+    transform: translateY(-100%);
 }
 
 
@@ -34,19 +58,20 @@ body {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    padding: 23.7px 20px;
+    padding: 10px 20px;
 }
 
 .header_nav {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-}
-
-.header_nav_item {
     font-size: 22px;
     color: #000;
 }
+
+.header_nav_item {}
+
+
 
 
 .header_logo {
@@ -68,7 +93,12 @@ body {
     color: red;
 }
 
-.header_logo_item {}
+.header_logo_item {
+    font-size: 25px;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
 
 .header_info {
     color: #000;
@@ -93,15 +123,17 @@ body {
     cursor: pointer;
     opacity: 0;
     position: fixed;
-    top: 35px;
+    top: 27px;
     right: 36px;
+    /* background-color: #020202; */
+    color: #000;
 }
 
 
 .burger span {
     height: 3px;
     width: 100%;
-    background-color: #000;
+
     border-radius: 2px;
 }
 
@@ -109,17 +141,40 @@ body {
 
 
 .close {
-    position: fixed;
-    top: 35px;
-    right: 36px;
+    position: absolute;
+    /* Привяжем его к панели */
+    top: 18px;
+    right: 39px;
+    background: none;
+    border: none;
+    font-size: 38px;
+    font-weight: 100;
+    /* очень тонкий */
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1;
+    /* Он всегда поверх контента меню */
+    color: #3e3b3b;
+    /* Контрастный цвет */
+    opacity: 0;
+    pointer-events: none;
+    /* Чтобы не ловил клики, когда спрятан */
+    transition: opacity .3s ease;
 }
 
-.close span {
+/* Когда меню открыто — крестик виден */
+.mob_content.open .close {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* .close span {
     font-size: 30px;
-}
+} */
 
 
-.mob_content {
+/* .mob_content {
     font-family: "Ubuntu Sans", sans-serif;
     position: fixed;
     top: 90px;
@@ -132,14 +187,45 @@ body {
     flex-direction: column;
     gap: 11px;
     padding: 20px 0 0 0;
-    z-index: 1000;
+    z-index: 3000;
     transition: all 0.3s ease-in-out;
     color: #000;
 
+} */
+.mob_content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, .1);
+    transform: translateX(100%);
+    /* спрятано за экраном справа */
+    transition: transform .3s ease-in-out;
+    z-index: 3000;
+    padding: 100px 16px 0 16px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
 }
 
+.mob_content.open {
+    transform: translateX(0);
+}
+
+/* при открытом меню блокируем прокрутку страницы (опционально) */
+.body--no-scroll {
+    overflow: hidden;
+}
+
+
+
 .header_nav_item_mob {
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .last {
@@ -158,6 +244,16 @@ body {
     width: 24px;
 } */
 
+.header_nav_item_text {
+    padding: 30px 10px;
+}
+
+.block_img_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
+
 .header_nav_item {}
 
 .hidden {
@@ -170,7 +266,7 @@ body {
 
 .main {
     position: relative;
-    margin-top: 100px;
+
     width: 100%;
     height: 600px;
     background-image: url("../assets/img3.webp");
@@ -179,32 +275,13 @@ body {
     background-position: 100% 80%;
 }
 
-.go-to-catalog {
-    position: absolute;
-    bottom: 55px;
-    right: 55px;
-    width: 250px;
-    height: 100px;
-    background-color: rgb(62, 163, 87);
-    text-align: center;
-    align-content: center;
-    border-radius: 10px;
-    color: aliceblue;
-    font-size: 30px;
-    box-shadow:
-        0 4px rgb(44, 116, 63),
-        /* нижняя тень */
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    /* внутренняя светлая тень сверху */
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-
+/* когда меню открыто — хедер не уезжает */
+.menu-open .header {
+    transform: none !important;
 }
 
-.go-to-catalog:active {
-    transform: translateY(4px);
-    box-shadow: 0 1px 0 rgb(44, 116, 63), inset 0 2px 3px rgba(0, 0, 0, 0.4);
-}
+
+
 
 @media (max-width: 999px) {
     .header_nav_item {
@@ -248,7 +325,19 @@ body {
 
 }
 
-@media (max-width: 610px) {
+@media (min-width: 611px) {
+    .mob_content {
+        transform: translateX(100%) !important;
+        transition: none;
+        /* чтобы не мигала при ресайзе */
+        pointer-events: none;
+        /* не ловит клики */
+    }
+}
+
+@media (max-width: 611px) {
+
+
     .header_wrapper {
         grid-template-columns: 1fr;
         justify-items: center;
@@ -282,19 +371,7 @@ body {
         align-self: center;
     }
 
-    .go-to-catalog {
-        position: absolute;
-        bottom: 55px;
-        right: 55px;
-        width: 150px;
-        height: 60px;
-        background-color: rgb(62, 163, 87);
 
-        border-radius: 10px;
-        color: aliceblue;
-        font-size: 24px;
-
-    }
 }
 
 
@@ -313,6 +390,20 @@ body {
 
 @media (max-width: 410px) {
     .header {
-        padding: 20px 0 20px 0;
+        padding: 5px 0 5px 0;
     }
+}
+
+.black {
+    color: #fff;
+
+}
+
+.black_burg {
+    background-color: #fff;
+}
+
+.black_mob {
+    background-color: #000;
+    color: #fff;
 }

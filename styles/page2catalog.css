@@ -31,30 +31,84 @@
     color: rgb(0, 0, 0);
 }
 
-.popular_wrapper {
+/* .popular_wrapper {
     font-family: "Ubuntu Sans", sans-serif;
     /* padding: 50px 0 0 0;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 24px; */
-    display: grid;
+/* display: grid;
     grid-template-columns: repeat(4, 260px);
     gap: 20px;
     justify-content: center;
+}  */
+.popular_wrapper {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
 }
 
-.popular_card {
+/* 900px и выше — 4 карточки */
+@media (min-width: 900px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(4, minmax(220px, 1fr));
+    }
+}
+
+
+/* От 801px и выше — 4 колонки
+@media (min-width: 801px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(4, minmax(220px, 1fr));
+    }
+} */
+
+@media (min-width: 800px) and (max-width: 899px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+
+    .container {
+        padding: 0;
+    }
+}
+
+@media (max-width: 799px) {
+    .popular_wrapper {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 5px;
+    }
+
+    .container {
+        padding: 0;
+    }
+}
+
+
+
+/* .popular_card {
     font-family: "Ubuntu Sans", sans-serif;
     background-color: rgb(255, 255, 255);
     border-radius: 15px;
     border: 2px solid #fff;
     /* width: 260px; */
-    height: 400px;
+/* height: 400px;
     box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
     overflow: hidden;
     cursor: pointer;
     display: block;
+} */
+.popular_card {
+    background-color: #fff;
+    /* border-radius: 15px; */
+    border: 2px solid #fff;
+    box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
+    overflow: hidden;
+    cursor: pointer;
+    display: grid;
+    grid-template-rows: auto auto auto 1fr;
+    /* media, title, price, desc */
 }
 
 .popular_card:hover {
@@ -62,24 +116,42 @@
     filter: contrast(120%);
 }
 
+.card_media {
+
+    /* можно 1/1 или 16/9 — как нравится по дизайну */
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    /* квадрат */
+
+    background: #fff;
+}
+
+/* Заполняем контейнер без искажений */
 .card_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* картинка заполняет блок и обрезается по краям */
+    display: block;
+}
+
+
+/* .card_img {
     height: 200px;
     object-fit: contain;
     width: 100%;
-
-
-
-}
+} */
 
 .card_title {
-    padding: 20px 0 10px 0;
+    padding: 20px 0 10px 10px;
     font-size: 20px;
-    text-align: center;
+    text-align: start;
 }
 
 .card_price {
+    padding: 0px 0 10px 10px;
     font-size: 18px;
-    text-align: center;
+    text-align: start;
     color: rgb(0, 0, 0);
 }
 
@@ -106,8 +178,10 @@
 }
 
 .card_desc {
-    font-size: 14px;
-    text-align: center;
+    padding: 0 10px;
+    font-size: clamp(12px, 1.5vw, 14px);
+    white-space: normal;
+
     color: #000000;
     font-family: 'Ubuntu', Arial, sans-serif;
     font-weight: 300;
@@ -129,132 +203,23 @@
 
 .card_btn {}
 
+.white-burger {
+    background-color: #000000;
+}
+
 
 /* ниже для корзины */
 
 .main_page3_size.selected {
     background-color: black;
     color: #fff;
-    border: 2px solod #333;
-}
-
-@media(max-width:1100px) {
-    .popular_wrapper {
-        grid-template-columns: repeat(4, 200px);
-    }
-
-    .popular-list {
-        margin: 20px auto;
-        gap: 30px;
-    }
-}
-
-@media(max-width:900px) {
-    .popular_wrapper {
-        grid-template-columns: repeat(2, 280px);
-    }
-
-    .popular-list {
-        gap: 30px;
-    }
-
-    .item {
-        font-size: 18px;
-    }
-}
-
-@media(max-width:700px) {
-    .popular-list {
-        gap: 20px;
-    }
-
-    .item {
-        font-size: 16px;
-    }
-
-    .popular {
-        padding: 100px 0 40px 0;
-
-    }
+    border: 2px solid #333;
 }
 
 
-@media(max-width:580px) {
-    .popular_title {
-        text-align: center;
-        padding: 0 0 50px 10px;
-
-    }
-
-    .popular_wrapper {
-        grid-template-columns: repeat(2, 250px);
-    }
-}
-
-@media(max-width:480px) {
-    .popular_title {
-        font-size: 35px;
-    }
-
-    .popular_wrapper {
-        /* padding: 50px 0 0 0;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 24px; */
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 0;
-
-    }
-
-    .item {
-
-        font-size: 14px;
-
-    }
-
-    .popular_card {
-        background-color: #fff;
-        width: 180px;
-        height: 350px;
-        box-shadow: 0 8px 20px rgba(248, 247, 247, 0.3);
-        overflow: hidden;
-
-    }
-
-    .button-wrapper {
-        width: 100px;
-    }
-
-    .card_title {
-        font-family: 'Ubuntu', Arial, sans-serif;
-        padding: 6px 0 0 0;
-        line-height: 1.35;
-        font-size: 15px;
-    }
-
-    .card_price {
-        padding: 10px 0 20px 0;
-        font-size: 14px;
-        text-align: center;
-        color: rgb(0, 0, 0);
-    }
 
 
 
-    .button-wrapper {
-        display: none;
-    }
-
-    .popular {}
-
-    .popular-list {
-        flex-wrap: wrap;
-        margin: 10px auto;
-        gap: 20px;
-    }
-}
 
 .remove-item {
     background: transparent;
