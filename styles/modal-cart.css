@@ -1,0 +1,129 @@
+#cart-modal {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    width: 450px;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+
+
+.product-in-card {
+    position: relative;
+
+
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: "Ubuntu Sans", sans-serif;
+    margin-bottom: 10px;
+    /* border: 1px solid #b1abab; */
+
+}
+
+.card-open-title {
+    margin: 10px 0;
+    font-family: "Ubuntu Sans", sans-serif;
+    font-size: 23px;
+
+}
+
+
+
+
+#cart-items {
+    max-height: 400px;
+    /* или больше, как тебе удобно */
+    overflow-y: auto;
+    padding-right: 10px;
+    /* чтобы скролл не налезал на текст */
+
+}
+
+.block-btn-modal {
+    display: flex;
+    gap: 10px;
+}
+
+.card-btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    z-index: 1002;
+
+}
+
+.card-btn-close::before {
+    content: '✕';
+}
+
+.remove-item {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #888;
+    cursor: pointer;
+    padding: 4px 8px;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.remove-item:hover {
+    color: #d00;
+}
+
+.btn-to-cart {
+    width: 200px;
+    display: block;
+    padding: 10px 20px;
+    background: #040404;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media(max-width:611px) {
+    #cart-modal {
+        width: 100vw;
+        height: 100vh;
+        max-height: none;
+        border-radius: 0;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+
+    .block-btn-modal {
+        display: block;
+
+    }
+
+    .btn-to-cart {
+        margin: 10px 0;
+        width: 100%;
+        display: block;
+        padding: 10px 20px;
+        background: #040404;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+    }
+}

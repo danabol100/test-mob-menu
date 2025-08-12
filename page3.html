@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/mini-cart.js"></script>
     <script src="js/header.js" defer></script>
+
     <script src="js/script-page1.js" defer></script>
     <script src="js/script-page3.js" defer></script>
     <script src="js/cart-modal.js" defer></script>
-    <script src="js/mini-cart.js"></script>
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +45,11 @@
                     </p>
                 </div>
                 <div class="header_info">
-                    <div class="header_info_item">
+                    <div id="mini-cart" class="mini-cart">
+                        <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
+                        <span id="mini-cart-count" class="mini-cart-count count-black">0</span>
+                    </div>
+                    <!-- <div class="header_info_item">
                         <div class="block_img_wrap">
                             <div class="block_img_mob">
                                 <a href="https://t.me/">
@@ -67,7 +73,7 @@
                         <!-- <p>9-324-424-234</p>
                         <p>понеділок - пятница: 09:00–18:00</p>
                         <p>по київскому часу</p> -->
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
             <div class="mob_menu">
@@ -119,6 +125,10 @@
 
 
                 </div>
+                <div id="mini-cart-mob" class="mini-cart-mob">
+                    <img class="mini-card-img-mob" src="assets/cart-icon.png" alt="Корзина">
+                    <span id="mini-cart-count-mob" class="mini-cart-count-mob count-black">0</span>
+                </div>
                 <button class="burger" aria-label="open menu">
                     <span class="white-burger"></span>
                     <span class="white-burger"></span>
@@ -143,16 +153,16 @@
 
             <div class="main_page3_wrap">
                 <div class="main_page3_gallery">
-                    <h3 class="main_page_title_under">Black Motion</h3>
-                    <p class="main_page3_price_under"> 1440 грн.</p>
+                    <!-- <h3 class="main_page_title_under">Black Motion</h3>
+                    <p class="main_page3_price_under"> 1440 грн.</p> -->
                     <div class="main_page3_gallery_item">
-                        <img class="product-img" src="assets/item3.webp" alt="Black Motion">
+                        <img class="product-img" src="assets/item-1.webp" alt="Black Motion">
                     </div>
                 </div>
                 <div class="main_page3_desc">
-                    <!-- <h3 class="main_page_title">Black Motion</h3>
-                    <p class="main_page3_articul">Артикул: 07025024123</p>
-                    <p class="main_page3_price"> 1440 грн.</p> -->
+                    <h3 class="main_page_title">Black Motion</h3>
+
+                    <p class="main_page3_price"> 1440 грн.</p>
                     <div class="size_block">
                         <div class="button_size">
                             <button class="main_page3_size">36</button>
@@ -306,18 +316,20 @@
         </div>
         <p class="logo_desc12 hidden">2025 ©</p>
     </footer>
-    <div id="mini-cart" class="mini-cart">
+    <!-- <div id="mini-cart" class="mini-cart">
         <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
         <span id="mini-cart-count" class="mini-cart-count">0</span>
-    </div>
+    </div> -->
     <!-- Модальное окно корзины -->
     <div id="cart-modal">
-        <h3 class="card-open-title">Ваше замовлення</h3>
+        <h3 class="card-open-title">Товар Додано до кошику</h3>
         <div id="cart-items"></div>
         <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
         <button class="card-btn-close" onclick="closeCart()"></button>
-        <div style="text-align: center;">
-            <a class="btn-to-cart" href="cart.html">Перейти</a>
+        <div class="block-btn-modal">
+            <a class="btn-to-cart" href="page2.html">Продовжити покупки</a>
+            <a class="btn-to-cart" href="cart.html">До сплаты</a>
+
         </div>
     </div>
 

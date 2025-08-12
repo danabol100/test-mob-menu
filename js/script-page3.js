@@ -94,9 +94,50 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!selectedSize) return alert("⛔ Выберите размер!");
 
             const name = document.querySelector('.main_page_title')?.textContent.trim() || "Без названия";
-            const priceText = document.querySelector('.main_page3_price')?.textContent || "0";
+            // const priceText = document.querySelector('.main_page3_price')?.textContent || "0";
+            // const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
+            // const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+            // 1) сначала пробуем цену с нажатой кнопки (data-price)
+            // let price = NaN;
+            // const btnPrice = parseFloat(btn.dataset.price);
+            // if (!Number.isNaN(btnPrice)) {
+            //     price = btnPrice;
+            // } else {
+            //     // 2) иначе парсим текст из .main_page3_price (уберём пробелы/грн/знаки)
+            //     const raw = document.querySelector('.main_page3_price')?.textContent || "0";
+            //     const normalized = raw
+            //         .replace(/\u00A0|\u202F|\s/g, '') // обычные и неразрывные пробелы
+            //         .replace(',', '.')                // запятую в точку
+            //         .replace(/[^\d.]/g, '');          // всё, кроме цифр и точки
+            //     price = parseFloat(normalized);
+            // }
+
+            // если вдруг всё равно не смогли – не даём добавить, чтобы не было NaN в корзине
+            // if (Number.isNaN(price)) {
+            //     alert('Не удалось определить цену товара');
+            //     return;
+            // }
+            // ✅ Парсим цену ТОЛЬКО из текста .main_page3_price
+            const priceEl = document.querySelector('.main_page3_price');
+            const raw = priceEl?.textContent || '0';
+
+            // Нормализация: убираем обычные и неразрывные пробелы, меняем запятую на точку,
+            // выкидываем всё, что не цифра и не точка (грн, символы и т.д.)
+            const normalized = raw
+                .replace(/\u00A0|\u202F|\s/g, '') // пробелы (в т.ч. неразрывные)
+                .replace(',', '.')                // десятичная запятая -> точка
+                .replace(/[^\d.]/g, '');          // всё лишнее
+
+            const price = Number.parseFloat(normalized);
+
+            if (!Number.isFinite(price)) {
+                alert('Не удалось определить цену товара');
+                return;
+            }
+
+
             const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
-            const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
+
 
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const existing = cart.find(item => item.name === name && item.size === selectedSize);
@@ -107,12 +148,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 cart.push({ name, price, img, size: selectedSize, qty: 1 });
             }
 
+            // localStorage.setItem('cart', JSON.stringify(cart));
+            // emitCartUpdated();
+            // updateMiniCart();
+
+            // if (document.getElementById('cart-modal')?.style.display === 'block') {
+            //     renderCartModal();
+            // }
             localStorage.setItem('cart', JSON.stringify(cart));
+            emitCartUpdated();
             updateMiniCart();
 
+            // Если модалка уже была открыта — просто перерисуем
             if (document.getElementById('cart-modal')?.style.display === 'block') {
                 renderCartModal();
             }
+
+            // перепривязать hover/клики (на случай динамики DOM)
+            if (typeof attachMiniCartHandlers === 'function') attachMiniCartHandlers();
+
+            // Авто-открытие корзины
+            if (window.innerWidth <= 1024) {
+                // 📱 Мобильная версия — сразу открыть
+                const cartModal = document.getElementById('cart-modal');
+                if (typeof renderCartModal === 'function') {
+                    renderCartModal();
+                    cartModal.style.display = 'block';
+                }
+            } else {
+                // 🖥 Десктоп — сымитировать hover
+                if (typeof showCartModalIfNotEmpty === 'function') {
+                    showCartModalIfNotEmpty();
+                }
+            }
+
         });
     });
 
@@ -120,15 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateMiniCart() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        const miniCart = document.getElementById('mini-cart');
-        const countSpan = document.getElementById('mini-cart-count');
+        // const miniCart = document.getElementById('mini-cart');
+        // const countSpan = document.getElementById('mini-cart-count');
+        const carts = [
+            { box: document.getElementById('mini-cart'), countSpan: document.getElementById('mini-cart-count') },
+            { box: document.getElementById('mini-cart-mob'), countSpan: document.getElementById('mini-cart-count-mob') }
+        ];
 
-        if (cart.length === 0) {
-            miniCart.style.display = 'none';
-        } else {
-            miniCart.style.display = 'block';
-            countSpan.textContent = count;
-        }
+        carts.forEach(({ box, countSpan }) => {
+            if (!box || !countSpan) return;
+            box.style.display = ''; // всегда показывать
+            // countSpan.textContent = count;
+            countSpan.textContent = count > 0 ? count : '';
+        });
     }
 
     // 📦 Открытие корзины
@@ -136,13 +209,102 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartModal = document.getElementById('cart-modal');
     const cartItems = document.getElementById('cart-items');
     const cartTotal = document.getElementById('cart-total');
+    const miniCartDesktop = document.getElementById('mini-cart');     // десктопная иконка
+    const miniCartMobile = document.getElementById('mini-cart-mob'); // мобильная иконка
 
-    miniCart?.addEventListener('click', () => {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) return;
-        renderCartModal();
-        cartModal.style.display = 'block';
-    });
+
+
+
+    // miniCart?.addEventListener('click', () => {
+    //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    //     if (cart.length === 0) return;
+    //     renderCartModal();
+    //     cartModal.style.display = 'block';
+    // });
+    // [document.getElementById('mini-cart'), document.getElementById('mini-cart-mob')].forEach(cartEl => {
+    //     cartEl?.addEventListener('click', () => {
+    //         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    //         if (cart.length === 0) return;
+    //         renderCartModal();
+    //         cartModal.style.display = 'block';
+    //     });
+    // });
+    // ===== Новая логика открытия корзины =====
+    // function showCartModal() {
+    //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    //     if (cart.length === 0) return;
+    //     renderCartModal();
+    //     cartModal.style.display = 'block';
+
+    //     // Если нужно, позиционируем под иконкой (десктоп)
+    //     if (window.innerWidth > 1024 && miniCartDesktop && cartModal) {
+    //         const rect = miniCartDesktop.getBoundingClientRect();
+    //         cartModal.style.position = 'fixed';
+    //         cartModal.style.top = (rect.bottom + 8) + 'px';
+    //         cartModal.style.left = Math.max(8, rect.right - cartModal.offsetWidth) + 'px';
+    //     }
+    // }
+
+    // function hideCartModal() {
+    //     if (cartModal) cartModal.style.display = 'none';
+    // }
+
+    // let hoverHideTimer = null;
+
+    // // 📱 Мобильная версия — открываем по клику
+    // function handleMobileClick(el) {
+    //     el?.addEventListener('click', () => {
+    //         if (window.innerWidth <= 1024) {
+    //             showCartModal();
+    //         }
+    //     });
+    // }
+    // handleMobileClick(miniCartMobile);
+    // handleMobileClick(miniCartDesktop); // на маленьких экранах и десктопная иконка тоже по клику
+
+    // // 🖥 Десктоп — показываем при наведении
+    // if (miniCartDesktop && cartModal) {
+    //     miniCartDesktop.addEventListener('mouseenter', () => {
+    //         if (window.innerWidth > 1024) {
+    //             clearTimeout(hoverHideTimer);
+    //             showCartModal();
+    //         }
+    //     });
+
+    //     miniCartDesktop.addEventListener('mouseleave', () => {
+    //         if (window.innerWidth > 1024) {
+    //             hoverHideTimer = setTimeout(() => {
+    //                 // Скрываем, только если курсор не над модалкой
+    //                 if (!cartModal.matches(':hover') && !miniCartDesktop.matches(':hover')) {
+    //                     hideCartModal();
+    //                 }
+    //             }, 200);
+    //         }
+    //     });
+
+    //     cartModal.addEventListener('mouseenter', () => {
+    //         if (window.innerWidth > 1024) {
+    //             clearTimeout(hoverHideTimer);
+    //         }
+    //     });
+
+    //     cartModal.addEventListener('mouseleave', () => {
+    //         if (window.innerWidth > 1024) {
+    //             hoverHideTimer = setTimeout(() => {
+    //                 if (!cartModal.matches(':hover') && !miniCartDesktop.matches(':hover')) {
+    //                     hideCartModal();
+    //                 }
+    //             }, 150);
+    //         }
+    //     });
+    // }
+
+    // На ресайз — закрываем, чтобы не залипало при смене брейкпоинта
+    // window.addEventListener('resize', () => {
+    //     hideCartModal();
+    // });
+
+
 
     // ❌ Закрытие корзины
     window.closeCart = () => {

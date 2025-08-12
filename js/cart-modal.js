@@ -28,7 +28,7 @@ function renderCartModal() {
         itemDiv.innerHTML = `
             <div class="product-in-card">
   <div style="position: relative; display: flex;padding:0 10px; gap: 48px; align-items: center;">
-    <img src="${item.img}" style="width: 55px; height: 55px; object-fit: cover;" alt="${item.name}">
+    <img src="${item.img}" style="width: 100px; height: 100px; object-fit: cover;" alt="${item.name}">
     
     <div>
       <div><strong>${item.name}</strong></div>
@@ -72,6 +72,7 @@ function renderCartModal() {
             if (item) item.qty += 1;
 
             localStorage.setItem('cart', JSON.stringify(cart));
+            emitCartUpdated();
             renderCartModal(); // перерисовываем модалку
         });
     });
@@ -93,6 +94,7 @@ function renderCartModal() {
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
+            emitCartUpdated();
             renderCartModal();
         });
     });
@@ -107,6 +109,7 @@ function renderCartModal() {
             cart = cart.filter(p => !(p.name === name && p.size === size));
 
             localStorage.setItem('cart', JSON.stringify(cart));
+            emitCartUpdated();
             renderCartModal();
         });
     });

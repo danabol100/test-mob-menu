@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/mini-cart.js" defer></script>
     <script src="js/header.js" defer></script>
     <script src="js/script-page1.js" defer></script>
     <script src="js/cart-modal.js" defer></script>
-    <script src="js/mini-cart.js" defer></script>
+
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,8 +57,13 @@
                                 class="love">love</span></a>
                     </p>
                 </div>
+
                 <div class="header_info">
-                    <div class="header_info_item black">
+                    <div id="mini-cart" class="mini-cart">
+                        <img class="mini-card-img" src="assets/shopping_bag_white.png" alt="Корзина">
+                        <span id="mini-cart-count" class="mini-cart-count">0</span>
+                    </div>
+                    <!-- <div class="header_info_item black">
                         <div class="block_img_wrap">
                             <div class="block_img_mob">
                                 <a href="https://t.me/">
@@ -76,67 +82,71 @@
                                 <a href="https://tik-tok.com"></a>
                                 <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
                             </div>
-                        </div>
+                        </div> -->
 
 
-                        <!-- <p>9-324-424-234</p>
+                    <!-- <p>9-324-424-234</p>
                         <p>понеділок - пятница: 09:00–18:00</p>
                         <p>по київскому часу</p> -->
-                    </div>
                 </div>
             </div>
-            <div class="mob_menu">
-                <div class="mob_content black_mob">
-                    <button class="close black" aria-label="close menu">
-                        <span>×</span>
-                    </button>
-                    <p class="header_nav_item_mob" close-nav><a class="scroll-link" href="#about-link">O бренде</a></p>
-                    <p class="header_nav_item_mob"><a class="scroll-link" href="page2.html">Каталог</a></p>
-                    <p class="header_nav_item_mob"><a class="scroll-link" href="#">Доставка</a></p>
-                    <p class="header_nav_item_mob"><a class="scroll-link" href="#">Блог</a></p>
-                    <p class="header_logo_item"><a href="#header-link"> <span class="pk black">PK</span><span
-                                class="love">love</span></a>
-                    </p>
+        </div>
+        <div class="mob_menu">
+            <div class="mob_content black_mob">
+                <button class="close black" aria-label="close menu">
+                    <span>×</span>
+                </button>
+                <p class="header_nav_item_mob" close-nav><a class="scroll-link" href="#about-link">O бренде</a></p>
+                <p class="header_nav_item_mob"><a class="scroll-link" href="page2.html">Каталог</a></p>
+                <p class="header_nav_item_mob"><a class="scroll-link" href="#">Доставка</a></p>
+                <p class="header_nav_item_mob"><a class="scroll-link" href="#">Блог</a></p>
+                <p class="header_logo_item"><a href="#header-link"> <span class="pk black">PK</span><span
+                            class="love">love</span></a>
+                </p>
 
 
-                    <p class="header_nav_item_text"> "Зручне взуття з широким носком для комфортних кроків щодня.
-                        Простір
-                        для пальців, стиль та турбота про ваші ноги."</p>
+                <p class="header_nav_item_text"> "Зручне взуття з широким носком для комфортних кроків щодня.
+                    Простір
+                    для пальців, стиль та турбота про ваші ноги."</p>
 
-                    <!-- <p class="header_nav_item last">9-324-424-234 <br>
+                <!-- <p class="header_nav_item last">9-324-424-234 <br>
                         понеділок - пятница: 09:00-18:00<br>
                         по київскому часу<br> -->
-                    <div class="block_img_wrap">
-                        <div class="block_img_mob">
-                            <a href="https://t.me/">
-                                <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
+                <div class="block_img_wrap">
+                    <div class="block_img_mob">
+                        <a href="https://t.me/">
+                            <img class="img" src="assets/4786597c-672e-48e9-a341-55775f2ce710.png" alt=""></a>
 
-                        </div>
-                        <div class="block_img_mob">
-                            <a href="https://instagram.com/">
-                                <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
-                        </div>
-                        <div class="block_img_mob">
-                            <a href="https://tik-tok.com"></a>
-                            <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
-                        </div>
-                        <div class="block_img_mob">
-                            <a href="https://tik-tok.com"></a>
-                            <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
-                        </div>
                     </div>
-
-
-
+                    <div class="block_img_mob">
+                        <a href="https://instagram.com/">
+                            <img class="img" src="assets/2cb8b21b-0917-47bf-95f6-ccc6ac841dfb.png" alt=""></a>
+                    </div>
+                    <div class="block_img_mob">
+                        <a href="https://tik-tok.com"></a>
+                        <img class="img" src="assets/5698d186-1603-42b9-a48a-8d989e09198c.png" alt=""></a>
+                    </div>
+                    <div class="block_img_mob">
+                        <a href="https://tik-tok.com"></a>
+                        <img class="img" src="assets/590f35a6-5881-41f6-a61b-8eddb538aa76.png" alt=""></a>
+                    </div>
                 </div>
-                <button class="burger" aria-label="open menu">
-                    <span class="black_burg"></span>
-                    <span class="black_burg"></span>
-                    <span class="black_burg"></span>
-                </button>
+
 
 
             </div>
+            <div id="mini-cart-mob" class="mini-cart-mob">
+                <img class="mini-card-img-mob" src="assets/shopping_bag_white.png" alt="Корзина">
+                <span id="mini-cart-count-mob" class="mini-cart-count-mob">0</span>
+            </div>
+            <button class="burger" aria-label="open menu">
+                <span class="black_burg"></span>
+                <span class="black_burg"></span>
+                <span class="black_burg"></span>
+            </button>
+
+
+        </div>
         </div>
     </section>
     <!-- <section class="main">
@@ -170,6 +180,7 @@
                 </div>
             </div>
         </div>
+        <hr>
     </section>
 
     <section class="fraze" id="fraze-link">
@@ -318,18 +329,20 @@
         </div>
     </div>
 
-    <div id="mini-cart" class="mini-cart">
-        <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
+    <!-- <div id="mini-cart" class="mini-cart">
+        <img class="mini-card-img" src="assets/" alt="Корзина">
         <span id="mini-cart-count" class="mini-cart-count">0</span>
-    </div>
+    </div> -->
     <!-- Модальное окно корзины -->
     <div id="cart-modal">
-        <h3 class="card-open-title">Ваше замовлення</h3>
+        <h3 class="card-open-title">Товар додано до кошику</h3>
         <div id="cart-items"></div>
         <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
         <button class="card-btn-close" onclick="closeCart()"></button>
-        <div style="text-align: center;">
-            <a class="btn-to-cart" href="cart.html">Перейти</a>
+        <div class="block-btn-modal">
+            <a class="btn-to-cart" href="page2.html">Продовжити покупки</a>
+            <a class="btn-to-cart" href="cart.html">До сплаты</a>
+
         </div>
     </div>
 

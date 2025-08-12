@@ -180,3 +180,26 @@ select {
 
     }
 }
+
+
+/* Мобильный вид оставляем центрированным (как было) */
+@media (max-width: 1024px) {
+    #cart-modal {
+        position: fixed;
+        /* как у тебя сейчас */
+        /* остальной текущий стиль модалки */
+    }
+}
+
+/* Десктоп: ведём себя как выпадающее окошко */
+@media (min-width: 1025px) {
+    #cart-modal {
+        display: none;
+        /* показываем через JS */
+        position: fixed;
+        /* позиционируем в JS возле иконки */
+        z-index: 9999;
+        /* оформление, если нужно: */
+        /* background: #fff; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.12); */
+    }
+}

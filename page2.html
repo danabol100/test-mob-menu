@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/mini-cart.js" defer></script>
     <script src="js/header.js" defer></script>
     <script src="js/script-page1.js" defer></script>
     <script src="js/cart-modal.js" defer></script>
-    <script src="js/mini-cart.js" defer></script>
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="styles/header.css"> -->
+
     <link rel="stylesheet" href="styles/styles.css">
     <title>Page2</title>
 </head>
@@ -36,7 +38,11 @@
                     </p>
                 </div>
                 <div class="header_info">
-                    <div class="header_info_item">
+                    <div id="mini-cart" class="mini-cart">
+                        <img class="mini-card-img" src="assets/cart-icon.png" alt="Корзина">
+                        <span id="mini-cart-count" class="mini-cart-count count-black">0</span>
+                    </div>
+                    <!-- <div class="header_info_item">
                         <div class="block_img_wrap">
                             <div class="block_img_mob">
                                 <a href="https://t.me/">
@@ -60,7 +66,7 @@
                         <!-- <p>9-324-424-234</p>
                         <p>понеділок - пятница: 09:00–18:00</p>
                         <p>по київскому часу</p> -->
-                    </div>
+
                 </div>
             </div>
             <div class="mob_menu">
@@ -111,6 +117,10 @@
 
 
 
+                </div>
+                <div id="mini-cart-mob" class="mini-cart-mob">
+                    <img class="mini-card-img-mob" src="assets/cart-icon.png" alt="Корзина">
+                    <span id="mini-cart-count-mob" class="mini-cart-count-mob count-black">0</span>
                 </div>
                 <button class="burger" aria-label="open menu">
                     <span class="white-burger"></span>
@@ -170,7 +180,7 @@
             <div class="popular_wrapper">
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <div class="card_media">
-                        <img src="assets/item1.webp" alt="img" data-hover="assets/slide.jpg" class="card_img">
+                        <img src="assets/item-1.webp" alt="img" data-hover="assets/item-1.webp" class="card_img">
                     </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
@@ -187,7 +197,7 @@
 
                 <a class="popular_card" href="page4.item2.html" style="text-decoration: none;">
                     <div class="card_media">
-                        <img src="assets/item2.webp" alt="" class="card_img">
+                        <img src="assets/item-3.webp" alt="" class="card_img">
                     </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion White</h5>
@@ -202,7 +212,7 @@
                 </a>
                 <a class="popular_card" href="page5item3.htm" style="text-decoration: none;">
                     <div class="card_media">
-                        <img src="assets/item3.webp" alt="" class="card_img">
+                        <img src="assets/item-2.webp" alt="" class="card_img">
                     </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Mocasin</h5>
@@ -217,7 +227,7 @@
                 </a>
                 <a class="popular_card" href="page3.html" style="text-decoration: none;">
                     <div class="card_media">
-                        <img src="assets/item1.webp" alt="" class="card_img">
+                        <img src="assets/item-3.webp" alt="" class="card_img">
                     </div>
                     <!-- <p class="card_stars"> ★ ★ ★ ★ <span>5.0</span> (4)</p> -->
                     <h5 class="card_title">Motion Black</h5>
@@ -354,12 +364,14 @@
     </div>
     <!-- Модальное окно корзины -->
     <div id="cart-modal">
-        <h3 class="card-open-title">Ваше замовлення</h3>
+        <h3 class="card-open-title">Товар додано до кошику</h3>
         <div id="cart-items"></div>
         <p id="cart-total" style="margin-top: 10px;"><strong>Итого: </strong>0 грн</p>
         <button class="card-btn-close" onclick="closeCart()"></button>
-        <div style="text-align: center;">
+        <div class="block-btn-modal">
+            <a class="btn-to-cart" href="page2.html">Продовжити покупки</a>
             <a class="btn-to-cart" href="cart.html">Перейти</a>
+
         </div>
     </div>
 

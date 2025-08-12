@@ -5,11 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeNav = document.querySelector('[close-nav]');
     const year = document.querySelector(".logo_desc1");
     const yearRemove = document.querySelector(".logo_desc12");
+    const miniMobCard = document.querySelector('.mini-cart-mob');
+    const miniCard = document.querySelector('.mini-cart');
 
     function handleViewportChange() {
         if (window.innerWidth <= 610) {
             year?.classList.add('hidden');
             yearRemove?.classList.remove('hidden');
+            miniCard?.classList.add('hidden');
+            miniMobCard.classList.remove('hidden');
         } else {
             year?.classList.remove('hidden');
             yearRemove?.classList.add('hidden');
@@ -18,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
             closeBtn?.classList.add('hidden');
             burger?.classList.remove('hidden');
             document.body.classList.remove('body--no-scroll');
+            miniCard?.classList.remove('hidden');
+            miniMobCard.classList.add('hidden');
 
         }
     }
