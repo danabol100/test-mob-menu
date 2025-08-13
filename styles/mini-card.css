@@ -55,6 +55,13 @@
     display: inline-block;
 }
 
+@media(max-width:610px) {
+    .desktop-cart-btn {
+        display: none;
+    }
+}
+
+
 /* Скрыто по умолчанию */
 .mobile-fixed-cart-btn {
     display: none;

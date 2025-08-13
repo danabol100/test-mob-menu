@@ -47,7 +47,8 @@
 
 
 (function () {
-    const header = document.querySelector('.header');
+    // const header = document.querySelector('.header');
+    const header = document.querySelector('.header-cart');
     if (!header) return;
 
     // Если хедер вдруг оказался внутри обрезающего контейнера — не надо.
@@ -59,6 +60,12 @@
     const DELTA = 12;         // чувствительность (меньше — чувствительнее)
 
     function onScroll() {
+        if (header.classList.contains('force-show')) return;
+        if (header.classList.contains('force-show')) {
+            header.classList.remove('header--hidden');
+            return;
+        }
+
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {

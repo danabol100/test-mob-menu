@@ -472,3 +472,30 @@
 .btn_desc {
     /* width: 400px;  <-- убрать */
 }
+
+.add-to-cart.in-cart:disabled {
+    opacity: .7;
+    background-color: #9c9a9a;
+    cursor: not-allowed;
+}
+
+/* Летающая точка */
+.fly-dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #111;
+    pointer-events: none;
+    z-index: 10000;
+    will-change: transform, opacity;
+}
+
+/* предпочитают меньше анимаций — просто пульс без полёта */
+@media (prefers-reduced-motion: reduce) {
+    .fly-dot {
+        display: none !important;
+    }
+}

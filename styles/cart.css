@@ -299,10 +299,7 @@ select {
         gap: 0;
     }
 
-    .cart-controls {
-        gap: 6px;
-
-    }
+    .cart-controls {}
 
     .price {
         font-size: 15px;

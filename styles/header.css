@@ -1,4 +1,4 @@
-.html {
+html {
     scroll-behavior: smooth;
 }
 
@@ -17,21 +17,35 @@ body {
 
 } */
 
-.header {
+/* .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     background: #fff;
-    /* border-bottom: 1px solid #ddd; */
+   
     border-bottom: none;
     padding: 0;
-    /* у тебя есть внутренние отступы в .header_wrapper */
+   
     z-index: 2000;
-    /* выше моб-меню (которое 1000) */
+    
+    transition: transform .3s ease;
+    will-change: transform;
+}  */
+.header,
+.header-cart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: none;
+    padding: 0;
+    z-index: 2000;
     transition: transform .3s ease;
     will-change: transform;
 }
+
 
 .black_header {
     background-color: #000;
@@ -277,9 +291,14 @@ body {
 }
 
 /* когда меню открыто — хедер не уезжает */
-.menu-open .header {
+/* .menu-open .header {
+    transform: none !important;
+} */
+.menu-open .header,
+.menu-open .header-cart {
     transform: none !important;
 }
+
 
 
 
@@ -407,4 +426,40 @@ body {
 .black_mob {
     background-color: #000;
     color: #fff;
+}
+
+/* анимация выезда/уезда (пример) */
+.header-cart {
+    transition: transform 0.3s ease;
+}
+
+.header-cart.header--hidden {
+    transform: translateY(-100%);
+}
+
+.header--hidden {
+    transform: translateY(-100%);
+}
+
+/* базовое состояние */
+.header-cart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    transform: translateY(var(--header-shift, 0));
+    transition: transform .3s ease;
+    will-change: transform;
+    box-sizing: border-box;
+}
+
+/* полностью скрыть на точную высоту */
+.header-cart.header--hidden {
+    --header-shift: calc(-1 * var(--header-h, 0px));
+}
+
+/* если открыто меню — всегда видно */
+.menu-open .header-cart {
+    transform: translateY(0) !important;
 }

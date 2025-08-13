@@ -1,377 +1,331 @@
 // script-page3.js
-
 // ===========================
-// 📦 Мини-корзина и корзина
+// 📦 Мини-корзина и карточка товара
 // ===========================
-document.addEventListener('DOMContentLoaded', () => {
-    updateMiniCart();
+document.addEventListener('DOMContentLoaded', function () {
+    // ---------- Утилиты ----------
+    function qs(sel, root) {
+        return (root || document).querySelector(sel);
+    }
+    function qsa(sel, root) {
+        return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+    }
 
-    // 🍔 Мобильное меню
-    const burger = document.querySelector('.burger');
-    const close = document.querySelector('.close');
-    const menu = document.querySelector('.mob_content');
-    const closeNav = document.querySelector('[close-nav]');
-    const year = document.querySelector(".logo_desc1");
-    const yearRemove = document.querySelector(".logo_desc12");
+    // Найти иконку корзины (сначала мобильную, потом десктопную)
+    function getCartIconEl() {
+        return document.getElementById('mini-cart-mob') || document.getElementById('mini-cart');
+    }
+
+    // Пульсация иконки после прилёта
+    function pulse(el) {
+        if (!el || typeof el.animate !== 'function') return;
+        el.animate(
+            [{ transform: 'scale(1)' }, { transform: 'scale(1.15)' }, { transform: 'scale(1)' }],
+            { duration: 300, easing: 'cubic-bezier(.2,.8,.2,1)' }
+        );
+    }
+
+    // Полёт от кнопки к иконке корзины (только на мобилке)
+    function flyToCart(fromBtn) {
+        if (window.innerWidth > 1024) return;                // только моб/планшет
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const target = getCartIconEl();
+        if (!fromBtn || !target) return;
+
+        const br = fromBtn.getBoundingClientRect();
+        const tr = target.getBoundingClientRect();
+
+        const startX = br.left + br.width / 2;
+        const startY = br.top + br.height / 2;
+        const endX = tr.left + tr.width / 2;
+        const endY = tr.top + tr.height / 2;
+
+        const dot = document.createElement('div');
+        dot.className = 'fly-dot';
+        // ставим в стартовую точку (через translate будем двигать)
+        dot.style.transform = `translate(${startX - 7}px, ${startY - 7}px)`;
+        document.body.appendChild(dot);
+
+        // небольшой «дугой» вверх: mid-точка выше, чем старт/финиш
+        const midX = (startX + endX) / 2;
+        const midY = Math.min(startY, endY) - Math.abs(endX - startX) * 0.30;
+
+        const dx1 = midX - startX;
+        const dy1 = midY - startY;
+        const dx2 = endX - startX;
+        const dy2 = endY - startY;
+
+        const anim = dot.animate(
+            [
+                { transform: `translate(${startX - 7}px, ${startY - 7}px) scale(1)`, opacity: 1, offset: 0 },
+                { transform: `translate(${startX - 7 + dx1}px, ${startY - 7 + dy1}px) scale(.9)`, opacity: .9, offset: 0.5, easing: 'cubic-bezier(.2,.7,.3,1)' },
+                { transform: `translate(${startX - 7 + dx2}px, ${startY - 7 + dy2}px) scale(.2)`, opacity: 0, offset: 1 }
+            ],
+            { duration: 1000, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' }
+        );
+
+        anim.onfinish = function () {
+            dot.remove();
+            pulse(target);
+        };
+    }
+
+
+    // ---------- Мини-корзина ----------
+    function readCart() {
+        try {
+            var data = localStorage.getItem('cart');
+            return data ? JSON.parse(data) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+    function writeCart(cart) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        // локальные апдейты
+        updateMiniCart();
+        // если где-то слушают это событие — уведомим
+        try { document.dispatchEvent(new Event('cart:updated')); } catch (e) { }
+    }
+    function getCount(cart) {
+        return cart.reduce(function (sum, item) { return sum + (Number(item.qty) || 0); }, 0);
+    }
+    function updateMiniCart() {
+        var cart = readCart();
+        var count = getCount(cart);
+
+        var pairs = [
+            { box: document.getElementById('mini-cart'), badge: document.getElementById('mini-cart-count') },
+            { box: document.getElementById('mini-cart-mob'), badge: document.getElementById('mini-cart-count-mob') }
+        ];
+        pairs.forEach(function (p) {
+            if (!p.box || !p.badge) return;
+            p.box.style.display = '';
+            p.badge.textContent = count > 0 ? String(count) : '';
+        });
+    }
+
+    // ---------- Хелперы для кнопки "В корзину" ----------
+    function isInCart(name, size) {
+        var cart = readCart();
+        return cart.some(function (i) { return i.name === name && i.size === size; });
+    }
+    function setAddBtnState(btn, inCart) {
+        if (!btn) return;
+        if (inCart) {
+            btn.textContent = 'Додано';
+            btn.disabled = true;
+            btn.classList.add('in-cart');
+        } else {
+            btn.textContent = 'В корзину';
+            btn.disabled = false;
+            btn.classList.remove('in-cart');
+        }
+    }
+    function syncAddBtnBySelectedSize(btn) {
+        var selectedBtn = qs('.main_page3_size.selected');
+        var selectedSize = selectedBtn ? (selectedBtn.textContent || '').trim() : '';
+        var nameEl = qs('.main_page_title');
+        var name = nameEl ? (nameEl.textContent || '').trim() : 'Без названия';
+
+        if (!selectedSize) {
+            setAddBtnState(btn, false);
+            return;
+        }
+        setAddBtnState(btn, isInCart(name, selectedSize));
+    }
+
+    // ---------- Мобильное меню ----------
+    var burger = qs('.burger');
+    var closeBtn = qs('.close');
+    var menu = qs('.mob_content');
+    var closeNav = qs('[close-nav]');
+    var year = qs('.logo_desc1');
+    var yearRemove = qs('.logo_desc12');
 
     function handleViewportChange() {
         if (window.innerWidth <= 479) {
-            year?.classList.add('hidden');
-            yearRemove?.classList.remove('hidden');
+            if (year) year.classList.add('hidden');
+            if (yearRemove) yearRemove.classList.remove('hidden');
         } else {
-            year?.classList.remove('hidden');
-            yearRemove?.classList.add('hidden');
+            if (year) year.classList.remove('hidden');
+            if (yearRemove) yearRemove.classList.add('hidden');
         }
     }
-
     handleViewportChange();
     window.addEventListener('resize', handleViewportChange);
 
-    if (burger && close && menu) {
-        burger.addEventListener('click', () => {
+    if (burger && closeBtn && menu) {
+        burger.addEventListener('click', function () {
             burger.classList.add('hidden');
-            close.classList.remove('hidden');
+            closeBtn.classList.remove('hidden');
             menu.classList.remove('hidden');
         });
-
-        close.addEventListener('click', () => {
+        closeBtn.addEventListener('click', function () {
             burger.classList.remove('hidden');
-            close.classList.add('hidden');
+            closeBtn.classList.add('hidden');
             menu.classList.add('hidden');
         });
-
-        document.addEventListener('click', (e) => {
-            if (!menu.contains(e.target) && !burger.contains(e.target) && !close.contains(e.target)) {
+        document.addEventListener('click', function (e) {
+            if (!menu.contains(e.target) && !burger.contains(e.target) && !closeBtn.contains(e.target)) {
                 menu.classList.add('hidden');
-                close.classList.add('hidden');
+                closeBtn.classList.add('hidden');
                 burger.classList.remove('hidden');
             }
         });
+        if (closeNav) {
+            closeNav.addEventListener('click', function () {
+                menu.classList.add('hidden');
+                closeBtn.classList.add('hidden');
+                burger.classList.remove('hidden');
+            });
+        }
+    }
 
-        closeNav?.addEventListener('click', () => {
-            menu.classList.add('hidden');
-            close.classList.add('hidden');
-            burger.classList.remove('hidden');
+    // ---------- Табы (если есть) ----------
+    var btnSize = document.getElementById('btn_desc');
+    var btnSpec = document.getElementById('btn_spec');
+    var sectionSize = qs('.toggle_size');
+    var sectionSpec = qs('.toggle_spec');
+
+    if (btnSize) {
+        btnSize.addEventListener('click', function () {
+            if (sectionSize) sectionSize.classList.remove('hidden1');
+            if (sectionSpec) sectionSpec.classList.add('hidden1');
+            btnSize.classList.add('hover');
+            if (btnSpec) btnSpec.classList.remove('hover');
+        });
+    }
+    if (btnSpec) {
+        btnSpec.addEventListener('click', function () {
+            if (sectionSize) sectionSize.classList.add('hidden1');
+            if (sectionSpec) sectionSpec.classList.remove('hidden1');
+            btnSpec.classList.add('hover');
+            if (btnSize) btnSize.classList.remove('hover');
         });
     }
 
-    // 🔁 Переключение вкладок
-    const btnSize = document.querySelector('#btn_desc');
-    const btnSpec = document.querySelector('#btn_spec');
-    const sectionSize = document.querySelector('.toggle_size');
-    const sectionSpec = document.querySelector('.toggle_spec');
+    // ---------- Выбор размера ----------
+    var sizeButtons = qsa('.main_page3_size');
+    var addToCartButtons = qsa('.add-to-cart');
 
-    btnSize?.addEventListener('click', () => {
-        sectionSize?.classList.remove('hidden1');
-        sectionSpec?.classList.add('hidden1');
-        btnSize.classList.add('hover');
-        btnSpec.classList.remove('hover');
-    });
-
-    btnSpec?.addEventListener('click', () => {
-        sectionSize?.classList.add('hidden1');
-        sectionSpec?.classList.remove('hidden1');
-        btnSize.classList.remove('hover');
-        btnSpec.classList.add('hover');
-    });
-
-    // 👟 Выбор размера
-    const sizeButtons = document.querySelectorAll('.main_page3_size');
-    sizeButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            sizeButtons.forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+    sizeButtons.forEach(function (sizeBtn) {
+        sizeBtn.addEventListener('click', function () {
+            sizeButtons.forEach(function (b) { b.classList.remove('selected'); });
+            sizeBtn.classList.add('selected');
+            // пересинхронизировать ВСЕ кнопки "В корзину" (обычно одна на странице)
+            addToCartButtons.forEach(function (btn) { syncAddBtnBySelectedSize(btn); });
         });
     });
 
-    // 🛒 Добавление в корзину
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    // addToCartButtons.forEach(btn => {
-    //     btn.addEventListener('click', () => {
-    //         const selectedSizeBtn = document.querySelector('.main_page3_size.selected');
-    //         const selectedSize = selectedSizeBtn?.textContent;
+    // ---------- Обработчик "В корзину" ----------
+    addToCartButtons.forEach(function (btn) {
+        // чтобы кнопка не сабмитила форму
+        btn.setAttribute('type', 'button');
+        // синхронизация состояния при загрузке
+        syncAddBtnBySelectedSize(btn);
 
-    //         if (!selectedSize) return alert("⛔ Выберите размер!");
-
-    //         const name = document.querySelector('.main_page_title')?.textContent.trim() || "Без названия";
-
-
-
-    //         const desc = document.querySelector('.sneakers_desc')?.textContent.trim() || '';
-
-
-
-    //         if (existing) {
-    //             existing.qty++;
-    //         } else {
-    //             cart.push({ name, price, img, size: selectedSize, qty: 1, desc }); // ← добавили desc
-    //         }
-
-
-
-
-    //         // ✅ Парсим цену ТОЛЬКО из текста .main_page3_price
-    //         const priceEl = document.querySelector('.main_page3_price');
-    //         const raw = priceEl?.textContent || '0';
-
-    //         // Нормализация: убираем обычные и неразрывные пробелы, меняем запятую на точку,
-    //         // выкидываем всё, что не цифра и не точка (грн, символы и т.д.)
-    //         const normalized = raw
-    //             .replace(/\u00A0|\u202F|\s/g, '') // пробелы (в т.ч. неразрывные)
-    //             .replace(',', '.')                // десятичная запятая -> точка
-    //             .replace(/[^\d.]/g, '');          // всё лишнее
-
-    //         const price = Number.parseFloat(normalized);
-
-    //         if (!Number.isFinite(price)) {
-    //             alert('Не удалось определить цену товара');
-    //             return;
-    //         }
-
-
-    //         const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
-
-
-    //         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //         const existing = cart.find(item => item.name === name && item.size === selectedSize);
-
-    //         if (existing) {
-    //             existing.qty++;
-    //         } else {
-    //             cart.push({ name, price, img, size: selectedSize, qty: 1 });
-    //         }
-
-    //         // localStorage.setItem('cart', JSON.stringify(cart));
-    //         // emitCartUpdated();
-    //         // updateMiniCart();
-
-    //         // if (document.getElementById('cart-modal')?.style.display === 'block') {
-    //         //     renderCartModal();
-    //         // }
-    //         localStorage.setItem('cart', JSON.stringify(cart));
-    //         emitCartUpdated();
-    //         updateMiniCart();
-
-    //         // Если модалка уже была открыта — просто перерисуем
-    //         if (document.getElementById('cart-modal')?.style.display === 'block') {
-    //             renderCartModal();
-    //         }
-
-    //         // перепривязать hover/клики (на случай динамики DOM)
-    //         if (typeof attachMiniCartHandlers === 'function') attachMiniCartHandlers();
-
-    //         // Авто-открытие корзины
-    //         if (window.innerWidth <= 1024) {
-    //             // 📱 Мобильная версия — сразу открыть
-    //             const cartModal = document.getElementById('cart-modal');
-    //             if (typeof renderCartModal === 'function') {
-    //                 renderCartModal();
-    //                 cartModal.style.display = 'block';
-    //             }
-    //         } else {
-    //             // 🖥 Десктоп — сымитировать hover
-    //             if (typeof showCartModalIfNotEmpty === 'function') {
-    //                 showCartModalIfNotEmpty();
-    //             }
-    //         }
-
-    //     });
-    // });
-    addToCartButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', function () {
             // 1) Проверяем выбранный размер
-            const selectedSizeBtn = document.querySelector('.main_page3_size.selected');
-            const selectedSize = selectedSizeBtn?.textContent;
-            if (!selectedSize) return alert("⛔ Выберите размер!");
+            var selectedSizeEl = qs('.main_page3_size.selected');
+            var selectedSize = selectedSizeEl ? (selectedSizeEl.textContent || '').trim() : '';
+            if (!selectedSize) {
+                alert('⛔ Выберите размер!');
+                return;
+            }
 
-            // 2) Считываем данные товара со страницы
-            const name = document.querySelector('.main_page_title')?.textContent.trim() || "Без названия";
-            const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
+            // 2) Данные товара
+            var nameEl = qs('.main_page_title');
+            var name = nameEl ? (nameEl.textContent || '').trim() : 'Без названия';
 
-            // Цена: парсинг из .main_page3_price
-            const priceEl = document.querySelector('.main_page3_price');
-            const raw = priceEl?.textContent || '0';
-            const normalized = raw
-                .replace(/\u00A0|\u202F|\s/g, '') // убрать пробелы (в т.ч. неразрывные)
-                .replace(',', '.')                // запятая -> точка
-                .replace(/[^\d.]/g, '');          // всё, кроме цифр/точки
-            const price = Number.parseFloat(normalized);
-            if (!Number.isFinite(price)) {
+            var imgEl = qs('.main_page3_gallery_item img');
+            var img = imgEl ? imgEl.getAttribute('src') || '' : '';
+
+            // Цена из .main_page3_price
+            var priceEl = qs('.main_page3_price');
+            var raw = priceEl ? (priceEl.textContent || '0') : '0';
+            var normalized = raw.replace(/\u00A0|\u202F|\s/g, '').replace(',', '.').replace(/[^\d.]/g, '');
+            var price = parseFloat(normalized);
+            if (!isFinite(price)) {
                 alert('Не удалось определить цену товара');
                 return;
             }
 
-            // 3) Описание из <p class="sneakers_desc">
-            const desc = document.querySelector('.sneakers_desc')?.textContent.trim() || '';
+            var descEl = qs('.sneakers_desc');
+            var desc = descEl ? (descEl.textContent || '').trim() : '';
 
-            // 4) Работа с корзиной
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const existing = cart.find(item => item.name === name && item.size === selectedSize);
+            // 3) Работа с корзиной
+            var cart = readCart();
+            var existing = cart.find(function (i) { return i.name === name && i.size === selectedSize; });
 
             if (existing) {
-                existing.qty++;
-                // при желании можно обновлять existing.desc = desc; если описание может меняться
+                // десктопная логика: если такой размер уже есть — увеличиваем qty
+                existing.qty = (existing.qty || 1) + 1;
             } else {
-                cart.push({ name, price, img, size: selectedSize, qty: 1, desc }); // ← С ПОЛЕМ desc
+                cart.push({ name: name, price: price, img: img, size: selectedSize, qty: 1, desc: desc });
+            }
+            writeCart(cart);
+
+            // Если модалка уже была открыта — перерисуем (если функция существует)
+            var cartModal = document.getElementById('cart-modal');
+            if (cartModal && cartModal.style.display === 'block' && typeof window.renderCartModal === 'function') {
+                window.renderCartModal();
+            }
+            if (typeof window.attachMiniCartHandlers === 'function') {
+                window.attachMiniCartHandlers();
             }
 
-            // 5) Сохраняем и обновляем UI
-            localStorage.setItem('cart', JSON.stringify(cart));
-            emitCartUpdated?.();
-            updateMiniCart();
-
-            if (document.getElementById('cart-modal')?.style.display === 'block') {
-                renderCartModal();
-            }
-            if (typeof attachMiniCartHandlers === 'function') attachMiniCartHandlers();
-
-            // Авто-открытие корзины
+            // 4) Меняем кнопку под текущий размер
+            setAddBtnState(btn, true);
+            // ЛИШЬ на мобилке — полёт к корзине
+            flyToCart(btn);
             if (window.innerWidth <= 1024) {
-                const cartModal = document.getElementById('cart-modal');
-                if (typeof renderCartModal === 'function') {
-                    renderCartModal();
-                    cartModal.style.display = 'block';
-                }
-            } else {
-                if (typeof showCartModalIfNotEmpty === 'function') {
-                    showCartModalIfNotEmpty();
+                const header = document.querySelector('.header-cart');
+                header?.classList.remove('header--hidden');
+                header?.classList.add('force-show');
+
+                // убираем "принудительное" состояние через 1.2 сек
+                setTimeout(() => header?.classList.remove('force-show'), 1200);
+            }
+
+
+
+            // if (window.innerWidth <= 1024) {
+            //     document.querySelector('header')?.classList.add('show'); // или твой класс, что включает хедер
+            // }
+            if (window.innerWidth <= 1024) {
+                document.querySelector('.header-cart')?.classList.remove('header--hidden');
+            }
+
+
+
+
+            // 5) Десктоп — автопоказ допускаем, мобильные — ничего не делаем
+            if (window.innerWidth > 1024) {
+                if (typeof window.showCartModalIfNotEmpty === 'function') {
+                    window.showCartModalIfNotEmpty();
                 }
             }
         });
     });
 
+    // ---------- Рендер модального окна корзины (если используется на странице) ----------
+    var cartModal = document.getElementById('cart-modal');
+    var cartItems = document.getElementById('cart-items');
+    var cartTotal = document.getElementById('cart-total');
 
-    // 🔄 Обновление мини-корзины
-    function updateMiniCart() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const count = cart.reduce((sum, item) => sum + item.qty, 0);
-        // const miniCart = document.getElementById('mini-cart');
-        // const countSpan = document.getElementById('mini-cart-count');
-        const carts = [
-            { box: document.getElementById('mini-cart'), countSpan: document.getElementById('mini-cart-count') },
-            { box: document.getElementById('mini-cart-mob'), countSpan: document.getElementById('mini-cart-count-mob') }
-        ];
-
-        carts.forEach(({ box, countSpan }) => {
-            if (!box || !countSpan) return;
-            box.style.display = ''; // всегда показывать
-            // countSpan.textContent = count;
-            countSpan.textContent = count > 0 ? count : '';
-        });
-    }
-
-    // 📦 Открытие корзины
-    const miniCart = document.getElementById('mini-cart');
-    const cartModal = document.getElementById('cart-modal');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const miniCartDesktop = document.getElementById('mini-cart');     // десктопная иконка
-    const miniCartMobile = document.getElementById('mini-cart-mob'); // мобильная иконка
-
-
-
-
-    // miniCart?.addEventListener('click', () => {
-    //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //     if (cart.length === 0) return;
-    //     renderCartModal();
-    //     cartModal.style.display = 'block';
-    // });
-    // [document.getElementById('mini-cart'), document.getElementById('mini-cart-mob')].forEach(cartEl => {
-    //     cartEl?.addEventListener('click', () => {
-    //         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //         if (cart.length === 0) return;
-    //         renderCartModal();
-    //         cartModal.style.display = 'block';
-    //     });
-    // });
-    // ===== Новая логика открытия корзины =====
-    // function showCartModal() {
-    //     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    //     if (cart.length === 0) return;
-    //     renderCartModal();
-    //     cartModal.style.display = 'block';
-
-    //     // Если нужно, позиционируем под иконкой (десктоп)
-    //     if (window.innerWidth > 1024 && miniCartDesktop && cartModal) {
-    //         const rect = miniCartDesktop.getBoundingClientRect();
-    //         cartModal.style.position = 'fixed';
-    //         cartModal.style.top = (rect.bottom + 8) + 'px';
-    //         cartModal.style.left = Math.max(8, rect.right - cartModal.offsetWidth) + 'px';
-    //     }
-    // }
-
-    // function hideCartModal() {
-    //     if (cartModal) cartModal.style.display = 'none';
-    // }
-
-    // let hoverHideTimer = null;
-
-    // // 📱 Мобильная версия — открываем по клику
-    // function handleMobileClick(el) {
-    //     el?.addEventListener('click', () => {
-    //         if (window.innerWidth <= 1024) {
-    //             showCartModal();
-    //         }
-    //     });
-    // }
-    // handleMobileClick(miniCartMobile);
-    // handleMobileClick(miniCartDesktop); // на маленьких экранах и десктопная иконка тоже по клику
-
-    // // 🖥 Десктоп — показываем при наведении
-    // if (miniCartDesktop && cartModal) {
-    //     miniCartDesktop.addEventListener('mouseenter', () => {
-    //         if (window.innerWidth > 1024) {
-    //             clearTimeout(hoverHideTimer);
-    //             showCartModal();
-    //         }
-    //     });
-
-    //     miniCartDesktop.addEventListener('mouseleave', () => {
-    //         if (window.innerWidth > 1024) {
-    //             hoverHideTimer = setTimeout(() => {
-    //                 // Скрываем, только если курсор не над модалкой
-    //                 if (!cartModal.matches(':hover') && !miniCartDesktop.matches(':hover')) {
-    //                     hideCartModal();
-    //                 }
-    //             }, 200);
-    //         }
-    //     });
-
-    //     cartModal.addEventListener('mouseenter', () => {
-    //         if (window.innerWidth > 1024) {
-    //             clearTimeout(hoverHideTimer);
-    //         }
-    //     });
-
-    //     cartModal.addEventListener('mouseleave', () => {
-    //         if (window.innerWidth > 1024) {
-    //             hoverHideTimer = setTimeout(() => {
-    //                 if (!cartModal.matches(':hover') && !miniCartDesktop.matches(':hover')) {
-    //                     hideCartModal();
-    //                 }
-    //             }, 150);
-    //         }
-    //     });
-    // }
-
-    // На ресайз — закрываем, чтобы не залипало при смене брейкпоинта
-    // window.addEventListener('resize', () => {
-    //     hideCartModal();
-    // });
-
-
-
-    // ❌ Закрытие корзины
-    window.closeCart = () => {
-        cartModal.style.display = 'none';
+    // экспортируем закрытие, если нужно из разметки
+    window.closeCart = function () {
+        if (cartModal) cartModal.style.display = 'none';
     };
 
-    // 🧠 Рендер модального окна корзины
-    function renderCartModal() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    window.renderCartModal = function () {
+        if (!cartItems || !cartTotal) return;
+
+        var cart = readCart();
         cartItems.innerHTML = '';
-        let total = 0;
+        var total = 0;
 
         if (cart.length === 0) {
             cartItems.innerHTML = '<p>Корзина пуста</p>';
@@ -380,82 +334,89 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        cart.forEach(item => {
-            const itemTotal = item.price * item.qty;
+        cart.forEach(function (item) {
+            var itemTotal = (item.price || 0) * (item.qty || 1);
             total += itemTotal;
 
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('product-in-card');
-
-            itemDiv.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 48px; padding: 5px 0;">
-          <img src="${item.img}" style="width: 55px; height: 55px; object-fit: cover; margin:0 0 0 10px">
-          <div style="flex-grow:1;">
-            <div><strong>${item.name}</strong></div>
-            <div>Розмір: ${item.size}</div>
-            <div style="margin: 8px 0; display: flex; align-items: center; gap: 10px;">
-              <button class="decrease-qty qty-btn" data-name="${item.name}" data-size="${item.size}">–</button>
-              <span>${item.qty}</span>
-              <button class="increase-qty qty-btn" data-name="${item.name}" data-size="${item.size}">+</button>
-              <span>шт.</span>
-            </div>
-            <div><strong>${itemTotal} грн</strong></div>
-          </div>
-          <button class="remove-item" data-name="${item.name}" data-size="${item.size}" title="Удалить">✕</button>
-        </div>
-      `;
+            var itemDiv = document.createElement('div');
+            itemDiv.className = 'product-in-card';
+            itemDiv.innerHTML =
+                '<div style="display:flex;align-items:center;gap:48px;padding:5px 0;">' +
+                '<img src="' + item.img + '" style="width:55px;height:55px;object-fit:cover;margin:0 0 0 10px">' +
+                '<div style="flex-grow:1;">' +
+                '<div><strong>' + item.name + '</strong></div>' +
+                '<div>Розмір: ' + item.size + '</div>' +
+                '<div style="margin:8px 0;display:flex;align-items:center;gap:10px;">' +
+                '<button class="decrease-qty qty-btn" data-name="' + item.name + '" data-size="' + item.size + '">–</button>' +
+                '<span>' + item.qty + '</span>' +
+                '<button class="increase-qty qty-btn" data-name="' + item.name + '" data-size="' + item.size + '">+</button>' +
+                '<span>шт.</span>' +
+                '</div>' +
+                '<div><strong>' + itemTotal + ' грн</strong></div>' +
+                '</div>' +
+                '<button class="remove-item" data-name="' + item.name + '" data-size="' + item.size + '" title="Удалить">✕</button>' +
+                '</div>';
 
             cartItems.appendChild(itemDiv);
         });
 
-        cartTotal.innerHTML = `<strong>До сплати:</strong> ${total} грн`;
-
+        cartTotal.innerHTML = '<strong>До сплати:</strong> ' + total + ' грн';
         setupCartControls();
-    }
+    };
 
     function setupCartControls() {
-        document.querySelectorAll('.remove-item').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.dataset.name;
-                const size = btn.dataset.size;
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                cart = cart.filter(i => !(i.name === name && i.size === size));
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateMiniCart();
-                renderCartModal();
-                if (cart.length === 0) cartModal.style.display = 'none';
+        qsa('.remove-item').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var name = btn.getAttribute('data-name');
+                var size = btn.getAttribute('data-size');
+                var cart = readCart().filter(function (i) { return !(i.name === name && i.size === size); });
+                writeCart(cart);
+                window.renderCartModal();
+                if (cart.length === 0 && cartModal) cartModal.style.display = 'none';
             });
         });
 
-        document.querySelectorAll('.increase-qty').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.dataset.name;
-                const size = btn.dataset.size;
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const item = cart.find(i => i.name === name && i.size === size);
-                if (item) item.qty++;
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateMiniCart();
-                renderCartModal();
+        qsa('.increase-qty').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var name = btn.getAttribute('data-name');
+                var size = btn.getAttribute('data-size');
+                var cart = readCart();
+                var item = cart.find(function (i) { return i.name === name && i.size === size; });
+                if (item) item.qty = (item.qty || 1) + 1;
+                writeCart(cart);
+                window.renderCartModal();
             });
         });
 
-        document.querySelectorAll('.decrease-qty').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.dataset.name;
-                const size = btn.dataset.size;
-                let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const item = cart.find(i => i.name === name && i.size === size);
-                if (item && item.qty > 1) {
-                    item.qty--;
-                } else {
-                    cart = cart.filter(i => !(i.name === name && i.size === size));
+        qsa('.decrease-qty').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var name = btn.getAttribute('data-name');
+                var size = btn.getAttribute('data-size');
+                var cart = readCart();
+                var item = cart.find(function (i) { return i.name === name && i.size === size; });
+                if (item) {
+                    if ((item.qty || 1) > 1) item.qty = item.qty - 1;
+                    else cart = cart.filter(function (i) { return !(i.name === name && i.size === size); });
                 }
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateMiniCart();
-                renderCartModal();
-                if (cart.length === 0) cartModal.style.display = 'none';
+                writeCart(cart);
+                window.renderCartModal();
+                if (cart.length === 0 && cartModal) cartModal.style.display = 'none';
             });
         });
     }
+
+    // ---------- Синхронизация кнопки при внешних изменениях ----------
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'cart') {
+            qsa('.add-to-cart').forEach(function (btn) { syncAddBtnBySelectedSize(btn); });
+        }
+    });
+    document.addEventListener('cart:updated', function () {
+        qsa('.add-to-cart').forEach(function (btn) { syncAddBtnBySelectedSize(btn); });
+    });
+
+    // первичная инициализация
+    updateMiniCart();
+    // если модалка где-то открывается — перерисуем содержимое
+    // (на этой странице можно вызвать window.renderCartModal() по необходимости)
 });
