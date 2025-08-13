@@ -31,20 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
             div.setAttribute('data-index', index); // для делегирования
 
             div.innerHTML = `
-                <img src="${item.img}" alt="${item.name}" />
-                <div class="cart-details">
-                    <div><strong>${item.name}</strong></div>
-                    <div>Розмір: ${item.size}</div>
-                    <div>Ціна: ${item.price} грн</div>
-                    <div class="cart-controls">
-                        <button class="qty-btn minus">−</button>
-                        <span>${item.qty}</span>
-                        <button class="qty-btn plus">+</button>
-                        <span>шт.</span>
-                        <button class="remove-btn" title="Удалить">&times;</button>
-                    </div>
-                </div>
-            `;
+    <img src="${item.img}" alt="${item.name}" />
+    <div class="cart-details">
+        <div><strong>${item.name}</strong></div>
+        <div class="cart-size">Розмір: ${item.size}</div>
+        ${item.desc ? `<div class="cart-desc">${item.desc}</div>` : ''}
+
+        <div class="card-block-size-price">
+            <div class="cart-controls">
+                <button class="qty-btn minus ${item.qty === 1 ? 'trash' : ''}" 
+                    aria-label="${item.qty === 1 ? 'Удалить товар' : 'Уменьшить кількість'}">
+                    ${item.qty === 1 ? '' : '−'}
+                </button>
+                <span class="card-qty">${item.qty}</span>
+                <button class="qty-btn plus">+</button>
+                
+            </div>
+            <div class="cart-price">${item.price} грн</div>
+        </div>
+    </div>
+`;
             cartItemsContainer.appendChild(div);
         });
 
@@ -64,15 +70,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target.classList.contains('plus')) {
             cart[index].qty += 1;
         }
-
         if (target.classList.contains('minus')) {
-            cart[index].qty -= 1;
-            if (cart[index].qty <= 0) cart.splice(index, 1);
+            if (cart[index].qty > 1) {
+                cart[index].qty -= 1;
+            } else {
+                // qty === 1 -> поведение корзинки: удаляем товар
+                cart.splice(index, 1);
+            }
         }
 
         if (target.classList.contains('remove-btn')) {
             cart.splice(index, 1);
         }
+
+        // if (target.classList.contains('minus')) {
+        //     cart[index].qty -= 1;
+        //     if (cart[index].qty <= 0) cart.splice(index, 1);
+        // }
+
+        // if (target.classList.contains('remove-btn')) {
+        //     cart.splice(index, 1);
+        // }
 
         localStorage.setItem('cart', JSON.stringify(cart));
 
@@ -99,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        alert(`✅ Дякуємо за замовлення, ${name}!
-Спосіб оплати: ${payment === 'card' ? 'Карткою онлайн' : 'Накладений платіж'}
+        alert(`✅ Дякуємо за замовлення, ${name} !
+                Спосіб оплати: ${payment === 'card' ? 'Карткою онлайн' : 'Накладений платіж'}
 Ми скоро з вами зв'яжемось.`);
 
         localStorage.removeItem('cart');
@@ -109,3 +127,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadCart();
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('#checkout-form');
+    if (!form) return;
+
+    const targetBtn = form.querySelector('.submit-btn');
+    if (!targetBtn) return;
+
+    // Создаём плавающую копию
+    const floatBtn = document.createElement('button');
+    floatBtn.type = 'button';
+    floatBtn.className = 'floating-submit';
+    floatBtn.textContent = targetBtn.textContent || 'До сплати';
+    document.body.appendChild(floatBtn);
+
+    // Клик по плавающей — кликает оригинал (срабатывает submit формы)
+    floatBtn.addEventListener('click', () => {
+        targetBtn.click();
+    });
+
+    // Следим за видимостью оригинальной кнопки
+    // Когда оригинал виден — копию прячем, когда не виден — показываем.
+    const observer = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+                floatBtn.classList.remove('show');
+            } else {
+                floatBtn.classList.add('show');
+            }
+        },
+        {
+            threshold: 1,              // считаем "видимой", когда кнопка полностью в кадре
+            // подправь нижний отступ, чтобы учесть свои поля/безопасную зону
+            rootMargin: '0px 0px -16px 0px'
+        }
+    );
+
+    observer.observe(targetBtn);
+
+    // На всякий случай: если текст кнопки меняется (локализация/итоговая сумма) — синхронизируем
+    const mo = new MutationObserver(() => {
+        floatBtn.textContent = targetBtn.textContent;
+    });
+    mo.observe(targetBtn, { childList: true, characterData: true, subtree: true });
+});
+

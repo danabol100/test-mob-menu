@@ -24,7 +24,7 @@
     padding: 0 16px;
     transform: translateX(100%);
     opacity: 0;
-    animation: slide 15s infinite;
+    animation: slide 12s infinite;
     transform: translate3d(100%, 0, 0);
 }
 
@@ -34,11 +34,11 @@
 }
 
 .text-item:nth-child(2) {
-    animation-delay: 5s;
+    animation-delay: 4s;
 }
 
 .text-item:nth-child(3) {
-    animation-delay: 10s;
+    animation-delay: 8s;
 }
 
 @keyframes slide {

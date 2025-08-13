@@ -140,15 +140,19 @@ function onMiniCartClick(e) {
         hideCartModal();
         window.location.href = CART_PAGE;
         return;
+    } else {
+        // мобильная логика
+        hideCartModal();
+        window.location.href = CART_PAGE; // тоже переход
     }
 
     // Мобильные/планшеты: клик -> открываем модалку
-    if (cart.length === 0) return;
-    if (typeof renderCartModal === 'function') {
-        renderCartModal();
-        const modal = document.getElementById('cart-modal');
-        if (modal) modal.style.display = 'block';
-    }
+    // if (cart.length === 0) return;
+    // if (typeof renderCartModal === 'function') {
+    //     renderCartModal();
+    //     const modal = document.getElementById('cart-modal');
+    //     if (modal) modal.style.display = 'block';
+    // }
 }
 
 let hoverHideTimer = null;

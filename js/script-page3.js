@@ -86,104 +86,160 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🛒 Добавление в корзину
     const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    // addToCartButtons.forEach(btn => {
+    //     btn.addEventListener('click', () => {
+    //         const selectedSizeBtn = document.querySelector('.main_page3_size.selected');
+    //         const selectedSize = selectedSizeBtn?.textContent;
+
+    //         if (!selectedSize) return alert("⛔ Выберите размер!");
+
+    //         const name = document.querySelector('.main_page_title')?.textContent.trim() || "Без названия";
+
+
+
+    //         const desc = document.querySelector('.sneakers_desc')?.textContent.trim() || '';
+
+
+
+    //         if (existing) {
+    //             existing.qty++;
+    //         } else {
+    //             cart.push({ name, price, img, size: selectedSize, qty: 1, desc }); // ← добавили desc
+    //         }
+
+
+
+
+    //         // ✅ Парсим цену ТОЛЬКО из текста .main_page3_price
+    //         const priceEl = document.querySelector('.main_page3_price');
+    //         const raw = priceEl?.textContent || '0';
+
+    //         // Нормализация: убираем обычные и неразрывные пробелы, меняем запятую на точку,
+    //         // выкидываем всё, что не цифра и не точка (грн, символы и т.д.)
+    //         const normalized = raw
+    //             .replace(/\u00A0|\u202F|\s/g, '') // пробелы (в т.ч. неразрывные)
+    //             .replace(',', '.')                // десятичная запятая -> точка
+    //             .replace(/[^\d.]/g, '');          // всё лишнее
+
+    //         const price = Number.parseFloat(normalized);
+
+    //         if (!Number.isFinite(price)) {
+    //             alert('Не удалось определить цену товара');
+    //             return;
+    //         }
+
+
+    //         const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
+
+
+    //         const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    //         const existing = cart.find(item => item.name === name && item.size === selectedSize);
+
+    //         if (existing) {
+    //             existing.qty++;
+    //         } else {
+    //             cart.push({ name, price, img, size: selectedSize, qty: 1 });
+    //         }
+
+    //         // localStorage.setItem('cart', JSON.stringify(cart));
+    //         // emitCartUpdated();
+    //         // updateMiniCart();
+
+    //         // if (document.getElementById('cart-modal')?.style.display === 'block') {
+    //         //     renderCartModal();
+    //         // }
+    //         localStorage.setItem('cart', JSON.stringify(cart));
+    //         emitCartUpdated();
+    //         updateMiniCart();
+
+    //         // Если модалка уже была открыта — просто перерисуем
+    //         if (document.getElementById('cart-modal')?.style.display === 'block') {
+    //             renderCartModal();
+    //         }
+
+    //         // перепривязать hover/клики (на случай динамики DOM)
+    //         if (typeof attachMiniCartHandlers === 'function') attachMiniCartHandlers();
+
+    //         // Авто-открытие корзины
+    //         if (window.innerWidth <= 1024) {
+    //             // 📱 Мобильная версия — сразу открыть
+    //             const cartModal = document.getElementById('cart-modal');
+    //             if (typeof renderCartModal === 'function') {
+    //                 renderCartModal();
+    //                 cartModal.style.display = 'block';
+    //             }
+    //         } else {
+    //             // 🖥 Десктоп — сымитировать hover
+    //             if (typeof showCartModalIfNotEmpty === 'function') {
+    //                 showCartModalIfNotEmpty();
+    //             }
+    //         }
+
+    //     });
+    // });
     addToCartButtons.forEach(btn => {
         btn.addEventListener('click', () => {
+            // 1) Проверяем выбранный размер
             const selectedSizeBtn = document.querySelector('.main_page3_size.selected');
             const selectedSize = selectedSizeBtn?.textContent;
-
             if (!selectedSize) return alert("⛔ Выберите размер!");
 
+            // 2) Считываем данные товара со страницы
             const name = document.querySelector('.main_page_title')?.textContent.trim() || "Без названия";
-            // const priceText = document.querySelector('.main_page3_price')?.textContent || "0";
-            // const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
-            // const price = parseFloat(priceText.replace(/[^\d.]/g, ''));
-            // 1) сначала пробуем цену с нажатой кнопки (data-price)
-            // let price = NaN;
-            // const btnPrice = parseFloat(btn.dataset.price);
-            // if (!Number.isNaN(btnPrice)) {
-            //     price = btnPrice;
-            // } else {
-            //     // 2) иначе парсим текст из .main_page3_price (уберём пробелы/грн/знаки)
-            //     const raw = document.querySelector('.main_page3_price')?.textContent || "0";
-            //     const normalized = raw
-            //         .replace(/\u00A0|\u202F|\s/g, '') // обычные и неразрывные пробелы
-            //         .replace(',', '.')                // запятую в точку
-            //         .replace(/[^\d.]/g, '');          // всё, кроме цифр и точки
-            //     price = parseFloat(normalized);
-            // }
+            const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
 
-            // если вдруг всё равно не смогли – не даём добавить, чтобы не было NaN в корзине
-            // if (Number.isNaN(price)) {
-            //     alert('Не удалось определить цену товара');
-            //     return;
-            // }
-            // ✅ Парсим цену ТОЛЬКО из текста .main_page3_price
+            // Цена: парсинг из .main_page3_price
             const priceEl = document.querySelector('.main_page3_price');
             const raw = priceEl?.textContent || '0';
-
-            // Нормализация: убираем обычные и неразрывные пробелы, меняем запятую на точку,
-            // выкидываем всё, что не цифра и не точка (грн, символы и т.д.)
             const normalized = raw
-                .replace(/\u00A0|\u202F|\s/g, '') // пробелы (в т.ч. неразрывные)
-                .replace(',', '.')                // десятичная запятая -> точка
-                .replace(/[^\d.]/g, '');          // всё лишнее
-
+                .replace(/\u00A0|\u202F|\s/g, '') // убрать пробелы (в т.ч. неразрывные)
+                .replace(',', '.')                // запятая -> точка
+                .replace(/[^\d.]/g, '');          // всё, кроме цифр/точки
             const price = Number.parseFloat(normalized);
-
             if (!Number.isFinite(price)) {
                 alert('Не удалось определить цену товара');
                 return;
             }
 
+            // 3) Описание из <p class="sneakers_desc">
+            const desc = document.querySelector('.sneakers_desc')?.textContent.trim() || '';
 
-            const img = document.querySelector('.main_page3_gallery_item img')?.getAttribute('src') || "";
-
-
+            // 4) Работа с корзиной
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const existing = cart.find(item => item.name === name && item.size === selectedSize);
 
             if (existing) {
                 existing.qty++;
+                // при желании можно обновлять existing.desc = desc; если описание может меняться
             } else {
-                cart.push({ name, price, img, size: selectedSize, qty: 1 });
+                cart.push({ name, price, img, size: selectedSize, qty: 1, desc }); // ← С ПОЛЕМ desc
             }
 
-            // localStorage.setItem('cart', JSON.stringify(cart));
-            // emitCartUpdated();
-            // updateMiniCart();
-
-            // if (document.getElementById('cart-modal')?.style.display === 'block') {
-            //     renderCartModal();
-            // }
+            // 5) Сохраняем и обновляем UI
             localStorage.setItem('cart', JSON.stringify(cart));
-            emitCartUpdated();
+            emitCartUpdated?.();
             updateMiniCart();
 
-            // Если модалка уже была открыта — просто перерисуем
             if (document.getElementById('cart-modal')?.style.display === 'block') {
                 renderCartModal();
             }
-
-            // перепривязать hover/клики (на случай динамики DOM)
             if (typeof attachMiniCartHandlers === 'function') attachMiniCartHandlers();
 
             // Авто-открытие корзины
             if (window.innerWidth <= 1024) {
-                // 📱 Мобильная версия — сразу открыть
                 const cartModal = document.getElementById('cart-modal');
                 if (typeof renderCartModal === 'function') {
                     renderCartModal();
                     cartModal.style.display = 'block';
                 }
             } else {
-                // 🖥 Десктоп — сымитировать hover
                 if (typeof showCartModalIfNotEmpty === 'function') {
                     showCartModalIfNotEmpty();
                 }
             }
-
         });
     });
+
 
     // 🔄 Обновление мини-корзины
     function updateMiniCart() {

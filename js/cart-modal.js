@@ -33,13 +33,16 @@ function renderCartModal() {
     <div>
       <div><strong>${item.name}</strong></div>
       <div>Розмір: ${item.size}</div>
-      
-      <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
+      <div class="card-block-size-price">
+             <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
         <button class="decrease-qty qty-btn" data-name="${item.name}" data-size="${item.size}">–</button>
         <span style="min-width: 20px; text-align: center;">${item.qty}</span>
         <button class="increase-qty qty-btn" data-name="${item.name}" data-size="${item.size}">+</button>
         <span style="margin-left: 6px;">шт.</span>
       </div>
+            
+      
+      
 
       <div style="margin-top: 5px;"><strong>${item.price * item.qty} грн</strong></div>
     </div>
@@ -54,7 +57,7 @@ function renderCartModal() {
         cartItems.appendChild(itemDiv);
     });
 
-    cartTotal.innerHTML = `<strong>До сплаты:</strong> ${total} грн`;
+    cartTotal.innerHTML = `<strong>До кошику:</strong> ${total} грн`;
 
     // Обработчики кнопок + и -
     const increaseButtons = cartItems.querySelectorAll('.increase-qty');
